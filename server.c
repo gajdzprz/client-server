@@ -11,7 +11,7 @@
 #define PORT 8081
 #define MAXUSERS 5
 
-int main(int argc,char * argv[])
+int main(int argc, char *argv[])
 {
 	int server_socket, client_socket;
 	struct sockaddr_in server_addr, client_addr;
