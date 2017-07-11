@@ -55,6 +55,7 @@ int main(int argc,char * argv[])
 		perror("accept error");
 		exit(1);
 	}
+	printf("server: got connection from %s\n", inet_ntoa(client_addr.sin_addr));
 
 	if (send(client_socket, "Test\n", strlen("Test\n"), 0) == -1)
 	{
@@ -63,6 +64,7 @@ int main(int argc,char * argv[])
 	}
 
 	close(client_socket);
+	close(server_socket);
 
 	return 0;
 }
