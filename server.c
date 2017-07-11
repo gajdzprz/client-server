@@ -9,12 +9,12 @@
 #include <unistd.h>
 
 #define PORT 8081
+#define MAXUSERS 5
 
 int main(int argc,char * argv[])
 {
 	int server_socket, client_socket;
 	struct sockaddr_in server_addr, client_addr;
-	int backlog = 1;
 	int size;
 	int yes = 1;
 
@@ -33,8 +33,6 @@ int main(int argc,char * argv[])
 
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_port = htons(PORT);
-	//server_addr.sin_addr.s_addr = INADDR_ANY;
-	//printf("%d",server_addr.sin_addr.s_addr);
 	server_addr.sin_addr.s_addr = inet_addr("10.0.2.15");
 	memset(&(server_addr.sin_zero), '\0', 8);
 
@@ -44,7 +42,7 @@ int main(int argc,char * argv[])
 		exit(1);
 	}
 
-	if (listen(server_socket, backlog) == -1)
+	if (listen(server_socket, MAXUSERS) == -1)
 	{
 		perror("listen error");
 		exit(1);
