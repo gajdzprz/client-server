@@ -57,10 +57,47 @@ int main(int argc, char *argv[])
 	}
 	printf("server: got connection from %s\n", inet_ntoa(client_addr.sin_addr));
 
-	if (send(client_socket, "Test\n", strlen("Test\n"), 0) == -1)
+	int numbytes;
+	char buf[100], login[100], haslo[100];
+
+	numbytes = recv(client_socket, login, 99, 0);
+	if (numbytes == -1)
 	{
-		perror("send error");
+		perror("Login error");
 		exit(1);
+	}
+	else if (numbytes == 0)
+	{
+		printf("Lost connection, client disconnected\n");
+	}
+	else
+	{
+		printf("%s\n",login); // later can be removed
+	}
+
+	numbytes = recv(client_socket, haslo, 99, 0);
+	if (numbytes == -1)
+	{
+		perror("Password error");
+		exit(1);
+	}
+	else if (numbytes == 0)
+	{
+		printf("Lost connection, client disconnected\n");
+	}
+	else
+	{
+		printf("%s\n",haslo); // later can be removed
+	}
+
+	// TO DO: insteda of this, implement checking user from file
+	if ((strcmp(login, "maslo") && strcmp(haslo, "qwerty")) == 0)
+	{
+		send(client_socket, "TAK\n", strlen("TAK\n"), 0);
+	}
+	else
+	{
+		send(client_socket, "NIE\n", strlen("NIE\n"), 0);
 	}
 
 	close(client_socket);
