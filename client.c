@@ -11,6 +11,9 @@
 #define PORT 8081
 #define MAXDATASIZE 100
 
+void display_menu(void);
+void display_files(void);
+
 int main(int argc, char *argv[])
 {
 	int client_socket, numbytes;
@@ -72,7 +75,45 @@ int main(int argc, char *argv[])
 		printf("%s",buf);
 	}
 
+	int choice;
+	display_menu();
+	scanf("%d", &choice);
+
+	if (choice > 0 && choice < 4)
+	{
+		display_files();
+		// TO DO: next if statement with choice of which file 
+		// want to download or remove
+	}
+	else if (choice == 4)
+	{
+		printf("Write path to the file:\n");
+	}
+	else
+	{
+		printf("Wrong number!\n");
+	}
+
 	close(client_socket);
 
 	return 0 ;
+}
+
+void display_menu(void)
+{
+	printf("-------MENU-------\n");
+	printf("1 - display files\n");
+	printf("2 - download file\n");
+	printf("3 - remove file\n");
+	printf("4 - send file\n");
+}
+
+// TO DO: download from server list of files
+void display_files(void)
+{
+	printf("-------MENU-------\n");
+	printf("abecadlo.txt\n");
+	printf("foto.png\n");
+	printf("index.html\n");
+	printf("etc...\n");
 }

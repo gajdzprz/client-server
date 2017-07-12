@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
 		printf("%s\n",haslo); // later can be removed
 	}
 
-	// TO DO: insteda of this, implement checking user from file
+	// TO DO: instead of this, implement checking user from file
 	if ((strcmp(login, "maslo") && strcmp(haslo, "qwerty")) == 0)
 	{
 		send(client_socket, "TAK\n", strlen("TAK\n"), 0);
