@@ -12,6 +12,7 @@
 #define MAXUSERS 5
 
 int sendall(int client_socket, char *buf);
+//int checklog(int client_socket, char *login, char *haslo);
 
 int main(int argc, char *argv[])
 {
@@ -93,25 +94,87 @@ int main(int argc, char *argv[])
 	}
 
 	// TO DO: instead of this, implement checking user from file
-	if ((strcmp(login, "maslo") && strcmp(haslo, "qwerty")) == 0)
-	{
-		if (sendall(client_socket, "TAK\n") == -1)
+int i = checklog(client_socket, login,  haslo); // char *login, char *haslo));
+
+		if( i == -1)
 		{
-			perror("sendall error");
+			if (sendall(client_socket, "TAK\n") == -1)
+			{
+			
+				perror("sendall error");
+			}
 		}
-	}
-	else
-	{
-		if (sendall(client_socket, "NIE\n") == -1)
+		else
 		{
-			perror("sendall error");
+			if (sendall(client_socket, "NIE\n") == -1)
+			{
+		
+				perror("sendall error");
+			}
 		}
-	}
+
 
 	close(client_socket);
 	close(server_socket);
 
 	return 0;
+}
+
+
+
+int checklog(int client_socket, char *login, char *haslo)// char *login, char *haslo)
+{
+typedef enum  {true = 1, false = 0} bool;
+char const* const logins;
+FILE *file = fopen("logins", "r");
+char line[512];
+char *search = " "; 
+char *log;
+bool find = false;
+ while (fgets(line, sizeof(line), file))
+ {
+        log = strtok(line, search);
+        while( log != NULL )
+        {
+                if((strcmp(log, login)) == 0)
+                {
+                        printf("\n%s", log);
+                        log = strtok(NULL, search);
+                        continue;
+                }
+                else if((strcmp(log, haslo)) == 0)
+                {
+                        printf("\n%s", log);
+                        find = true;
+                        break;
+                }
+                else
+                {
+                break;
+                }
+        }
+	if(find == true)
+        {
+                printf("\nFound\n");
+                break;
+        }
+        else
+        {
+                printf("\nNot found\n");
+        }
+ }
+        //fclose(file);
+ 	if(find == true) 
+	{
+		return (-1);
+	}
+	else
+	{
+		return (0);
+	}
+
+  	 
+		fclose(file);
 }
 
 int sendall(int client_socket, char *buf)
@@ -134,3 +197,4 @@ int sendall(int client_socket, char *buf)
 
 	return (sent_bytes == -1) ? -1 : 0;
 }
+
