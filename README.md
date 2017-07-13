@@ -12,12 +12,14 @@ git clone git@github.com:gajdzprz/client-server.git name_of_your_folder
 
 ```
 gcc server.c -o server
+gcc client.c -o client
 ```
 
 ## How to run project
 
 ```
 ./server
+./client 10.0.2.15
 ```
 
 ## How to connect to server via telnet

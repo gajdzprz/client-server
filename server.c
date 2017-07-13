@@ -11,6 +11,8 @@
 #define PORT 8081
 #define MAXUSERS 5
 
+int sendall(int client_socket, char *buf);
+
 int main(int argc, char *argv[])
 {
 	int server_socket, client_socket;
@@ -90,18 +92,45 @@ int main(int argc, char *argv[])
 		printf("%s\n",haslo); // later can be removed
 	}
 
-	// TO DO: insteda of this, implement checking user from file
+	// TO DO: instead of this, implement checking user from file
 	if ((strcmp(login, "maslo") && strcmp(haslo, "qwerty")) == 0)
 	{
-		send(client_socket, "TAK\n", strlen("TAK\n"), 0);
+		if (sendall(client_socket, "TAK\n") == -1)
+		{
+			perror("sendall error");
+		}
 	}
 	else
 	{
-		send(client_socket, "NIE\n", strlen("NIE\n"), 0);
+		if (sendall(client_socket, "NIE\n") == -1)
+		{
+			perror("sendall error");
+		}
 	}
 
 	close(client_socket);
 	close(server_socket);
 
 	return 0;
+}
+
+int sendall(int client_socket, char *buf)
+{
+	int total_sent = 0;
+	int bytes_left = sizeof(buf);
+	int sent_bytes;
+
+	while(total_sent < sizeof(buf))
+	{
+		sent_bytes = send(client_socket, buf+total_sent, bytes_left, 0);
+		if (sent_bytes == -1)
+		{
+			printf("Sent only %d of %lu bytes\n", total_sent, sizeof(buf));
+			break;
+		}
+		total_sent += sent_bytes;
+		bytes_left -= sent_bytes;
+	}
+
+	return (sent_bytes == -1) ? -1 : 0;
 }
