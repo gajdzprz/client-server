@@ -90,8 +90,8 @@ int main(int argc, char *argv[])
 
 	strncat(login,js + tokens[2].start, tokens[2].end - tokens[2].start);
 	strncat(haslo,js + tokens[4].start, tokens[4].end - tokens[4].start);
-  	int i = checklog(client_socket, login,  haslo); 
-		if( i == -1)
+  	int log = checklog(client_socket, login,  haslo); 
+		if( log == -1)
 		{
 			if (sendall(client_socket, "TAK\n") == -1)
 			{
