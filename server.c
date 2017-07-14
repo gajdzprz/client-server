@@ -8,12 +8,13 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+// jsmn include
+#include "../jsmn/jsmn.h"
+
 #define PORT 8081
 #define MAXUSERS 5
 
 int sendall(int client_socket, char *buf);
-//int checklog(int client_socket, char *login, char *haslo);
-
 int main(int argc, char *argv[])
 {
 	int server_socket, client_socket;
@@ -60,16 +61,17 @@ int main(int argc, char *argv[])
 	}
 	printf("server: got connection from %s\n", inet_ntoa(client_addr.sin_addr));
 
-	int numbytes;
-	char buf[100], login[100], haslo[100];
-	memset(buf,'\0', sizeof(buf));
+	
+	char buf[100], login[100], haslo[100], js[100];
+	memset(js,'\0',sizeof(js));
+  memset(buf,'\0', sizeof(buf));
 	memset(login,'\0', sizeof(login));
 	memset(haslo,'\0', sizeof(haslo));
-	
-	numbytes = recv(client_socket, login, 99, 0);
+  int numbytes;
+	numbytes = recv(client_socket, js, 99, 0);
 	if (numbytes == -1)
 	{
-		perror("Login error");
+		perror("js error");
 		exit(1);
 	}
 	else if (numbytes == 0)
@@ -78,26 +80,22 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("%s\n",login); // later can be removed
+		printf("js:%s\n",js);
 	}
 
-	numbytes = recv(client_socket, haslo, 99, 0);
-	if (numbytes == -1)
+	jsmn_parser parser;
+	jsmn_init(&parser);
+	jsmntok_t tokens[5];
+	if (jsmn_parse(&parser, js, strlen(js), tokens, 10) < 0)
 	{
-		perror("Password error");
+		printf("jsmn_parse error\n");
 		exit(1);
 	}
-	else if (numbytes == 0)
-	{
-		printf("Lost connection, client disconnected\n");
-	}
-	else
-	{
-		printf("%s\n",haslo); // later can be removed
-	}
 
-	// TO DO: instead of this, implement checking user from file
-int i = checklog(client_socket, login,  haslo); // char *login, char *haslo));
+	strncat(login,js + tokens[2].start, tokens[2].end - tokens[2].start);
+	strncat(haslo,js + tokens[4].start, tokens[4].end - tokens[4].start);
+  
+  int i = checklog(client_socket, login,  haslo); 
 
 		if( i == -1)
 		{
@@ -115,17 +113,14 @@ int i = checklog(client_socket, login,  haslo); // char *login, char *haslo));
 				perror("sendall error");
 			}
 		}
-
-
-	close(client_socket);
+  close(client_socket);
 	close(server_socket);
-
-	return 0;
+  return 0;
 }
 
 
 
-int checklog(int client_socket, char *login, char *haslo)// char *login, char *haslo)
+int checklog(int client_socket, char *login, char *haslo)
 {
 typedef enum  {true = 1, false = 0} bool;
 char const* const logins;
@@ -174,10 +169,7 @@ bool find = false;
 	else
 	{
 		return (0);
-	}
-
-  	 
-		//fclose(file);
+	}		
 }
 
 int sendall(int client_socket, char *buf)

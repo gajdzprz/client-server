@@ -5,15 +5,25 @@ Client-Server created by sajmon93 and gajdzprz
 ## How to clone project in linux
 
 ```
-git clone git@github.com:gajdzprz/client-server.git name_of_your_folder
+git clone git@github.com:gajdzprz/client-server.git client-server
 ```
 
 ## How to compile project
 
+Before you start compile project you need to clone jsmn
 ```
-gcc server.c -o server
-gcc client.c -o client
+git clone https://github.com/zserge/jsmn jsmn
 ```
+next go to jsmn directory and run
+```
+make
+```
+you should get a libjsmn.a
+next go to client-server directory and run
+```
+make
+```
+now you should get server and client programs
 
 ## How to run project
 

@@ -50,15 +50,29 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
+	// creating json login
+	char js[100] = "{\"login\": \"";
+
 	printf("Podaj login:");
 	scanf("%s",buf);
-	send(client_socket, buf, strlen(buf), 0);
+
+	strcat(js,buf);
+
 	memset(buf,'\0', sizeof(buf));
 
 	printf("Podaj haslo:");
 	scanf("%s",buf);
-	send(client_socket, buf, strlen(buf), 0);
+
+	strcat(js,"\", \"password\": \"");
+	strcat(js,buf);
+
+	strcat(js,"\"}");
+
+	printf("json:%s\n",js);
+
+	send(client_socket, js, strlen(js), 0);
 	memset(buf,'\0', sizeof(buf));
+	memset(js,'\0', sizeof(buf));
 
 	numbytes = recv(client_socket,buf,MAXDATASIZE-1,0);
 	if (numbytes == -1)
