@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="pl" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>man (Unix) – Wikipedia, wolna encyklopedia</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Man_(Unix)","wgTitle":"Man (Unix)","wgCurRevisionId":49403315,"wgRevisionId":49403315,"wgArticleId":819786,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Polecenia Unix"],"wgBreakFrames":false,"wgPageContentLanguage":"pl","wgPageContentModel":"wikitext","wgSeparatorTransformTable":[",\t."," \t,"],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","styczeń","luty","marzec","kwiecień","maj","czerwiec","lipiec","sierpień","wrzesień","październik","listopad","grudzień"],"wgMonthNamesShort":["","sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru"],"wgRelevantPageName":"Man_(Unix)","wgRelevantArticleId":819786,"wgRequestId":"WWO82gpAIDUAAE6ZM-QAAAAI","wgIsProbablyEditable":true,"wgRelevantPageIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgFlaggedRevsParams":{"tags":{"accuracy":{"levels":1,"quality":2,"pristine":4}}},"wgStableRevisionId":49403315,"wgWikiEditorEnabledModules":{"toolbar":true,"preview":false,"publish":false},"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":false,"wgPopupsShouldSendModuleToUser":false,"wgPopupsConflictsWithNavPopupGadget":false,"wgVisualEditor":{"pageLanguageCode":"pl","pageLanguageDir":"ltr","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"pl","wgMFExpandAllSectionsUserOption":false,"wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":true},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"polski","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q709369","wgCentralAuthMobileDomain":false,"wgVisualEditorToolbarScrollOffset":0,"wgVisualEditorUnsupportedEditParams":["preload","preloadparams","preloadtitle","undo","undoafter","veswitched"],"wgEditSubmitButtonLabelPublish":true});mw.loader.state({"ext.gadget.small-references":"ready","ext.gadget.main-page-css":"ready","ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","ext.flaggedRevs.basic":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@05ejm55",function($,jQuery,require,module){mw.user.options.set({"variant":"pl"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest","ext.gadget.maps","ext.gadget.heading-icons","ext.gadget.refToolbar","ext.gadget.edit-buttons","ext.gadget.edit-summaries","ext.gadget.edit-first-section","ext.gadget.edit-summary-warning","ext.gadget.wikibugs","ext.gadget.nuxTBKeys","ext.gadget.enhanced-upload","ext.gadget.map-toggler","ext.gadget.ReferenceTooltips","ext.gadget.main-page-js","ext.gadget.pope","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.compactlinks","ext.uls.interface","ext.centralNotice.geoIP","ext.centralNotice.startUp","ext.flaggedRevs.advanced","skins.vector.js"]);});</script>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=pl&amp;modules=ext.flaggedRevs.basic%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=pl&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=pl&amp;modules=ext.gadget.main-page-css%2Csmall-references&amp;only=styles&amp;skin=vector"/>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=pl&amp;modules=site.styles&amp;only=styles&amp;skin=vector"/>
+<meta name="generator" content="MediaWiki 1.30.0-wmf.7"/>
+<meta name="referrer" content="origin-when-cross-origin"/>
+<link rel="alternate" href="android-app://org.wikipedia/http/pl.m.wikipedia.org/wiki/Man_(Unix)"/>
+<link rel="alternate" type="application/x-wiki" title="Edytuj" href="/w/index.php?title=Man_(Unix)&amp;action=edit"/>
+<link rel="edit" title="Edytuj" href="/w/index.php?title=Man_(Unix)&amp;action=edit"/>
+<link rel="apple-touch-icon" href="/static/apple-touch/wikipedia.png"/>
+<link rel="shortcut icon" href="/static/favicon/wikipedia.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikipedia (pl)"/>
+<link rel="EditURI" type="application/rsd+xml" href="//pl.wikipedia.org/w/api.php?action=rsd"/>
+<link rel="copyright" href="//creativecommons.org/licenses/by-sa/3.0/"/>
+<link rel="canonical" href="https://pl.wikipedia.org/wiki/Man_(Unix)"/>
+<link rel="dns-prefetch" href="//login.wikimedia.org"/>
+<link rel="dns-prefetch" href="//meta.wikimedia.org" />
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Man_Unix rootpage-Man_Unix skin-vector action-view">		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+							<div id="siteNotice" class="mw-body-content"><!-- CentralNotice --></div>
+						<div class="mw-indicators mw-body-content">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="pl">man (Unix)</h1>
+									<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">Z Wikipedii, wolnej encyklopedii</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Skocz do:					<a href="#mw-head">nawigacja</a>, 					<a href="#p-search">szukaj</a>
+				</div>
+				<div id="mw-content-text" lang="pl" dir="ltr" class="mw-content-ltr"><div class="mw-parser-output"><p><b>man</b> – narzędzie służące do wyświetlania stron pomocy man, stosowane w systemach <a href="/wiki/Unix" title="Unix">Unix</a> i <a href="/wiki/System_uniksopodobny" title="System uniksopodobny">uniksopodobnych</a>. Nazwa jest skrótem od <a href="/wiki/J%C4%99zyk_angielski" title="Język angielski">ang.</a>&#160;<span lang="en" style="font-style: italic;" xml:lang="en">manual</span> – instrukcja obsługi.</p>
+<h2><span class="mw-headline" id="U.C5.BCycie">Użycie</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Man_(Unix)&amp;action=edit&amp;section=1" title="Edytuj sekcję: Użycie">edytuj</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Aby wyświetlić wybraną stronę pomocy <i>man</i> należy wpisać w <a href="/wiki/Wiersz_polece%C5%84" title="Wiersz poleceń">wierszu polecenia</a>:</p>
+<pre>
+man <i>nazwa_strony</i>
+</pre>
+<p>Aby zamknąć stronę wystarczy nacisnąć klawisz <kbd class="keyboard-key nowrap" style="border: 1px solid #aaa; -moz-border-radius: 0.2em; -webkit-border-radius: 0.2em; border-radius: 0.2em; -moz-box-shadow: 0.1em 0.2em 0.2em #ddd; -webkit-box-shadow: 0.1em 0.2em 0.2em #ddd; box-shadow: 0.1em 0.2em 0.2em #ddd; background-color: #f9f9f9; background-image: -moz-linear-gradient(top, #eee, #f9f9f9, #eee); background-image: -o-linear-gradient(top, #eee, #f9f9f9, #eee); background-image: -webkit-linear-gradient(top, #eee, #f9f9f9, #eee); background-image: linear-gradient(to bottom, #eee, #f9f9f9, #eee); padding: 0.1em 0.3em; font-family: inherit; font-size: 0.85em;">Q</kbd>. Instrukcja <i>man</i> niekoniecznie musi być czytana tylko przez użytkownika – można zastosować czytanie automatyczne, które pozwala na przetworzenie jej do wygodniejszego formatu np. do druku lub do wprowadzania treści w inteligentny analizator. Do czytania programowego najczęściej wyłącza się stronicowanie (podział na strony) – w przykładzie następuje zmiana domyślnego pagera na polecenie <i>cat</i>:</p>
+<pre>
+man -P cat man
+</pre>
+<p>Zdarza się, że istnieje kilka stron pomocy <i>man</i> o tej samej nazwie, różniących się jednak numerem sekcji, wtedy należy podać konkretny numer sekcji:</p>
+<pre>
+man <i>numer_sekcji</i> <i>nazwa_strony</i>
+</pre>
+<p>Przykładowo stronę pomocy dla polecenia <i>passwd</i> można wywołać następująco:</p>
+<pre>
+man passwd    # domyślnie zostanie wybrana sekcja 1
+man 1 passwd  # jawnie wybrana sekcja 1
+man 5 passwd  # jawnie wybrana sekcja 5
+</pre>
+<p>W <a href="/wiki/Linux" title="Linux">Linuksie</a> i <a href="/wiki/Berkeley_Software_Distribution" title="Berkeley Software Distribution">BSD</a> występują następujące sekcje tematyczne&#160;:</p>
+<dl>
+<dd>
+<table class="wikitable">
+<tr>
+<th>Numer sekcji</th>
+<th>Kategoria</th>
+</tr>
+<tr>
+<td>1</td>
+<td>komendy ogólne</td>
+</tr>
+<tr>
+<td>2</td>
+<td>wywołania systemowe</td>
+</tr>
+<tr>
+<td>3</td>
+<td>funkcje biblioteki C</td>
+</tr>
+<tr>
+<td>4</td>
+<td>pliki specjalne</td>
+</tr>
+<tr>
+<td>5</td>
+<td>formaty plików</td>
+</tr>
+<tr>
+<td>6</td>
+<td>gry komputerowe i wygaszacze ekranu</td>
+</tr>
+<tr>
+<td>7</td>
+<td>różne</td>
+</tr>
+<tr>
+<td>8</td>
+<td>administracja systemem i daemony</td>
+</tr>
+</table>
+</dd>
+</dl>
+<p>W wersji Unix System V numeracja jest podobna:</p>
+<dl>
+<dd>
+<table class="wikitable">
+<tr>
+<th>Numer sekcji</th>
+<th>Kategoria</th>
+</tr>
+<tr>
+<td>1</td>
+<td>komendy ogólne</td>
+</tr>
+<tr>
+<td>1M</td>
+<td>administracja systemem i daemony</td>
+</tr>
+<tr>
+<td>2</td>
+<td>wywołania systemowe</td>
+</tr>
+<tr>
+<td>3</td>
+<td>funkcje biblioteki C</td>
+</tr>
+<tr>
+<td>4</td>
+<td>formaty plików</td>
+</tr>
+<tr>
+<td>5</td>
+<td>różne</td>
+</tr>
+<tr>
+<td>6</td>
+<td>gry komputerowe i wygaszacze ekranu</td>
+</tr>
+<tr>
+<td>7</td>
+<td>pliki specjalne</td>
+</tr>
+</table>
+</dd>
+</dl>
+<h2><span class="mw-headline" id="Linki_zewn.C4.99trzne">Linki zewnętrzne</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Man_(Unix)&amp;action=edit&amp;section=2" title="Edytuj sekcję: Linki zewnętrzne">edytuj</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table class="infobox noprint plainlinks" cellpadding="4">
+<tr>
+<td style="vertical-align:middle; text-align:center; width:30px;"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Wikibooks-logo.svg/28px-Wikibooks-logo.svg.png" width="28" height="28" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Wikibooks-logo.svg/42px-Wikibooks-logo.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Wikibooks-logo.svg/56px-Wikibooks-logo.svg.png 2x" data-file-width="300" data-file-height="300" /></td>
+<td style="line-height:normal; vertical-align:middle; text-align:center;">Zobacz w <a href="/wiki/Wikibooks" title="Wikibooks">Wikibooks</a> publikację<br />
+<b><a href="https://pl.wikibooks.org/wiki/Informatyka_dla_gimnazjum/Narz%C4%99dzie_man" class="extiw" title="b:Informatyka dla gimnazjum/Narzędzie man">Informatyka dla gimnazjum/Narzędzie man</a></b></td>
+</tr>
+</table>
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.polarhome.com/service/man/generic.php?qf=man&amp;af=0&amp;sf=0&amp;of=Debian&amp;tf=0">Strona man dla polecenia man w systemie Debian</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.polarhome.com/service/man/">Strony man dla różnych systemów operacyjnych, z możliwością przeszukiwania za pomocą narzędzia man i apropos</a></li>
+</ul>
+<table class="navbox do-not-make-smaller" cellspacing="0" style=";">
+<tr>
+<td style="padding:2px;">
+<table cellspacing="0" class="nowraplinks collapsible collapsed" style="width:100%;background:transparent;color:inherit;">
+<tr>
+<th style=";" colspan="2" class="navbox-title">
+<div style="float:left; width:6em;text-align:left;">
+<div class="noprint plainlinks" style="background-color:transparent; padding:0; font-weight:normal; font-size:xx-small; color:#002bb8;&#160;;;border:none; white-space:nowrap;"><a href="/wiki/Szablon:Polecenia_Unix" title="Szablon:Polecenia Unix"><span title="Pokaż ten szablon" style="color:#002bb8; ;;border:none;">p</span></a>&#160;<span style="font-size:80%;">•</span>&#160;<a href="/wiki/Dyskusja_szablonu:Polecenia_Unix" title="Dyskusja szablonu:Polecenia Unix"><span style="color:#002bb8;" title="Dyskusja na temat tego szablonu">d</span></a>&#160;<span style="font-size:80%;">•</span>&#160;<a class="external text" href="//pl.wikipedia.org/w/index.php?title=Szablon:Polecenia_Unix&amp;action=edit"><span style="color:#002bb8;&#160;;;border:none;" title="Możesz edytować ten szablon. Użyj przycisku podglądu przed zapisaniem zmian.">e</span></a></div>
+</div>
+<span class="noprint" style="font-size:110%;"><a href="/wiki/Polecenia_systemu_operacyjnego_Unix" title="Polecenia systemu operacyjnego Unix">Polecenia systemów operacyjnych Unix</a></span></th>
+</tr>
+<tr style="height:2px;">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style=";;">System plików</td>
+<td style="width:100%;text-align:left;border-left:2px solid #fdfdfd;padding:0px;;;" class="navbox-list hlist navbox-odd">
+<div style="padding:0em 0.25em"><a href="/wiki/Cat_(Unix)" title="Cat (Unix)">cat</a> • <a href="/wiki/Chmod" title="Chmod">chmod</a> • <a href="/wiki/Chown" title="Chown">chown</a> • <a href="/wiki/Chgrp" title="Chgrp">chgrp</a> • <a href="/w/index.php?title=Cksum&amp;action=edit&amp;redlink=1" class="new" title="Cksum (strona nie istnieje)">cksum</a> • <a href="/w/index.php?title=Cmp_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Cmp (Unix) (strona nie istnieje)">cmp</a> • <a href="/wiki/Cp_(Unix)" title="Cp (Unix)">cp</a> • <a href="/wiki/Dd_(Unix)" title="Dd (Unix)">dd</a> • <a href="/wiki/Du_(Unix)" title="Du (Unix)">du</a> • <a href="/wiki/Df_(Unix)" title="Df (Unix)">df</a> • <a href="/wiki/File_(Unix)" title="File (Unix)">file</a> • <a href="/wiki/Fsck" title="Fsck">fsck</a> • <a href="/w/index.php?title=Fuser_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Fuser (Unix) (strona nie istnieje)">fuser</a> • <a href="/wiki/Ln_(Unix)" title="Ln (Unix)">ln</a> • <a href="/wiki/Ls_(Unix)" title="Ls (Unix)">ls</a> • <a href="/wiki/Mkdir" title="Mkdir">mkdir</a> • <a href="/wiki/Mount" title="Mount">mount</a> • <a href="/wiki/Mv_(Unix)" title="Mv (Unix)">mv</a> • <a href="/w/index.php?title=Pax_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Pax (Unix) (strona nie istnieje)">pax</a> • <a href="/wiki/Pwd_(informatyka)" title="Pwd (informatyka)">pwd</a> • <a href="/wiki/Rm_(Unix)" title="Rm (Unix)">rm</a> • <a href="/wiki/Rmdir" title="Rmdir">rmdir</a> • <a href="/wiki/Split_(Unix)" title="Split (Unix)">split</a> • <a href="/w/index.php?title=Tee_(polecenie)&amp;action=edit&amp;redlink=1" class="new" title="Tee (polecenie) (strona nie istnieje)">tee</a> • <a href="/wiki/Touch_(Unix)" title="Touch (Unix)">touch</a> • <a href="/wiki/Tree_(Unix)" title="Tree (Unix)">tree</a> • <a href="/wiki/Type_(Unix)" title="Type (Unix)">type</a> • <a href="/wiki/Umask" title="Umask">umask</a></div>
+</td>
+</tr>
+<tr style="height:2px">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style=";;">Procesy</td>
+<td style="width:100%;text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list hlist navbox-even">
+<div style="padding:0em 0.25em"><a href="/wiki/At_(Unix)" title="At (Unix)">at</a> • <a href="/w/index.php?title=Bg_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Bg (Unix) (strona nie istnieje)">bg</a> • <a href="/wiki/Chroot" title="Chroot">chroot</a> • <a href="/wiki/Cron" title="Cron">cron</a> • <a href="/wiki/Fg_(Unix)" title="Fg (Unix)">fg</a> • <a href="/wiki/Kill_(polecenie)" title="Kill (polecenie)">kill</a> • <a href="/wiki/Killall" title="Killall">killall</a> • <a href="/wiki/Nice_(Unix)" title="Nice (Unix)">nice</a> • <a href="/w/index.php?title=Pgrep&amp;action=edit&amp;redlink=1" class="new" title="Pgrep (strona nie istnieje)">pgrep</a> • <a href="/w/index.php?title=Pkill&amp;action=edit&amp;redlink=1" class="new" title="Pkill (strona nie istnieje)">pkill</a> • <a href="/wiki/Ps" title="Ps">ps</a> • <a href="/w/index.php?title=Pstree&amp;action=edit&amp;redlink=1" class="new" title="Pstree (strona nie istnieje)">pstree</a> • <a href="/wiki/Time_(Unix)" title="Time (Unix)">time</a> • <a href="/wiki/Top_(Unix)" title="Top (Unix)">top</a></div>
+</td>
+</tr>
+<tr style="height:2px">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style=";;">Środowisko użytkownika</td>
+<td style="width:100%;text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list hlist navbox-odd">
+<div style="padding:0em 0.25em"><a href="/w/index.php?title=Clear_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Clear (Unix) (strona nie istnieje)">clear</a> • <a href="/wiki/Env" title="Env">env</a> • <a href="/w/index.php?title=Exit_(command)&amp;action=edit&amp;redlink=1" class="new" title="Exit (command) (strona nie istnieje)">exit</a> • <a href="/wiki/Finger_(protok%C3%B3%C5%82)" title="Finger (protokół)">finger</a> • <a href="/w/index.php?title=History_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="History (Unix) (strona nie istnieje)">history</a> • <a href="/wiki/Logname" title="Logname">logname</a> • <a href="/wiki/Mesg" title="Mesg">mesg</a> • <a href="/wiki/Passwd" title="Passwd">passwd</a> • <a href="/w/index.php?title=Su_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Su (Unix) (strona nie istnieje)">su</a> • <a href="/wiki/Sudo" title="Sudo">sudo</a> • <a href="/w/index.php?title=Talk_(program)&amp;action=edit&amp;redlink=1" class="new" title="Talk (program) (strona nie istnieje)">talk</a> • <a href="/w/index.php?title=Tput&amp;action=edit&amp;redlink=1" class="new" title="Tput (strona nie istnieje)">tput</a> • <a href="/wiki/Uname" title="Uname">uname</a> • <a href="/wiki/Uptime" title="Uptime">uptime</a> • <a href="/wiki/W_(Unix)" title="W (Unix)">w</a> • <a href="/wiki/Wall_(Unix)" title="Wall (Unix)">wall</a> • <a href="/wiki/Who_(Unix)" title="Who (Unix)">who</a> • <a href="/wiki/Whoami" title="Whoami">whoami</a> • <a href="/wiki/Write_(Unix)" title="Write (Unix)">write</a></div>
+</td>
+</tr>
+<tr style="height:2px">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style=";;">Przetwarzanie tekstu</td>
+<td style="width:100%;text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list hlist navbox-even">
+<div style="padding:0em 0.25em"><a href="/wiki/AWK" title="AWK">awk</a> • <a href="/wiki/Banner_(Unix)" title="Banner (Unix)">banner</a> • <a href="/wiki/Basename" title="Basename">basename</a> • <a href="/w/index.php?title=Comm&amp;action=edit&amp;redlink=1" class="new" title="Comm (strona nie istnieje)">comm</a> • <a href="/w/index.php?title=Csplit&amp;action=edit&amp;redlink=1" class="new" title="Csplit (strona nie istnieje)">csplit</a> • <a href="/wiki/Cut_(Unix)" title="Cut (Unix)">cut</a> • <a href="/wiki/Diff" title="Diff">diff</a> • <a href="/wiki/Dirname" title="Dirname">dirname</a> • <a href="/wiki/Ed" title="Ed">ed</a> • <a href="/wiki/Ex_(Unix)" title="Ex (Unix)">ex</a> • <a href="/w/index.php?title=Fmt&amp;action=edit&amp;redlink=1" class="new" title="Fmt (strona nie istnieje)">fmt</a> • <a href="/w/index.php?title=Fold_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Fold (Unix) (strona nie istnieje)">fold</a> • <a href="/wiki/Head_(Unix)" title="Head (Unix)">head</a> • <a href="/wiki/Iconv" title="Iconv">iconv</a> • <a href="/w/index.php?title=Join_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Join (Unix) (strona nie istnieje)">join</a> • <a href="/wiki/Less_(Unix)" title="Less (Unix)">less</a> • <a href="/wiki/More_(Unix)" title="More (Unix)">more</a> • <a href="/w/index.php?title=Nl_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Nl (Unix) (strona nie istnieje)">nl</a> • <a href="/wiki/Paste_(Unix)" title="Paste (Unix)">paste</a> • <a href="/wiki/Printf" title="Printf">printf</a> • <a href="/wiki/Sed_(program)" title="Sed (program)">sed</a> • <a href="/wiki/Sort_(Unix)" title="Sort (Unix)">sort</a> • <a href="/w/index.php?title=Spell_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Spell (Unix) (strona nie istnieje)">spell</a> • <a href="/wiki/Strings_(Unix)" title="Strings (Unix)">strings</a> • <a href="/wiki/Tail_(Unix)" title="Tail (Unix)">tail</a> • <a href="/wiki/Tr_(Unix)" title="Tr (Unix)">tr</a> • <a href="/wiki/Uniq" title="Uniq">uniq</a> • <a href="/wiki/Vi_(program)" title="Vi (program)">vi</a> • <a href="/wiki/Wc_(Unix)" title="Wc (Unix)">wc</a> • <a href="/wiki/Xargs" title="Xargs">xargs</a> • <a href="/wiki/Yes_(Unix)" title="Yes (Unix)">yes</a></div>
+</td>
+</tr>
+<tr style="height:2px">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style=";;">Wbudowane w powłokę</td>
+<td style="width:100%;text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list hlist navbox-odd">
+<div style="padding:0em 0.25em"><a href="/w/index.php?title=Alias_(polecenie)&amp;action=edit&amp;redlink=1" class="new" title="Alias (polecenie) (strona nie istnieje)">alias</a> • <a href="/w/index.php?title=Cd_(polecenie)&amp;action=edit&amp;redlink=1" class="new" title="Cd (polecenie) (strona nie istnieje)">cd</a> • <a href="/wiki/Echo_(polecenie)" title="Echo (polecenie)">echo</a> • <a href="/wiki/Test_(Unix)" title="Test (Unix)">test</a> • <a href="/wiki/Unset" title="Unset">unset</a> • <a href="/w/index.php?title=Wait_(polecenie)&amp;action=edit&amp;redlink=1" class="new" title="Wait (polecenie) (strona nie istnieje)">wait</a></div>
+</td>
+</tr>
+<tr style="height:2px">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style=";;">Komunikacja</td>
+<td style="width:100%;text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list hlist navbox-even">
+<div style="padding:0em 0.25em"><a href="/w/index.php?title=Dig_(polecenie)&amp;action=edit&amp;redlink=1" class="new" title="Dig (polecenie) (strona nie istnieje)">dig</a> • <a href="/w/index.php?title=Host_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Host (Unix) (strona nie istnieje)">host</a> • <a href="/wiki/Ifconfig" title="Ifconfig">ifconfig</a> • <a href="/wiki/Inetd" title="Inetd">inetd</a> • <a href="/wiki/Netcat" title="Netcat">netcat</a> • <a href="/wiki/Netstat" title="Netstat">netstat</a> • <a href="/wiki/Nslookup" title="Nslookup">nslookup</a> • <a href="/wiki/Ping" title="Ping">ping</a> • <a href="/w/index.php?title=Rdate&amp;action=edit&amp;redlink=1" class="new" title="Rdate (strona nie istnieje)">rdate</a> • <a href="/wiki/Rlogin" title="Rlogin">rlogin</a> • <a href="/w/index.php?title=Route_(polecenie)&amp;action=edit&amp;redlink=1" class="new" title="Route (polecenie) (strona nie istnieje)">route</a> • <a href="/wiki/OpenSSH" title="OpenSSH">ssh</a> • <a href="/wiki/Traceroute" title="Traceroute">traceroute</a></div>
+</td>
+</tr>
+<tr style="height:2px">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style=";;">Wyszukiwanie</td>
+<td style="width:100%;text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list hlist navbox-odd">
+<div style="padding:0em 0.25em"><a href="/wiki/Find" title="Find">find</a> • <a href="/wiki/Grep" title="Grep">grep</a> • <a href="/w/index.php?title=Locate_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Locate (Unix) (strona nie istnieje)">locate</a> • <a href="/w/index.php?title=Whatis&amp;action=edit&amp;redlink=1" class="new" title="Whatis (strona nie istnieje)">whatis</a> • <a href="/wiki/Whereis" title="Whereis">whereis</a></div>
+</td>
+</tr>
+<tr style="height:2px">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style=";;">Dokumentacja</td>
+<td style="width:100%;text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list hlist navbox-even">
+<div style="padding:0em 0.25em"><a href="/w/index.php?title=Apropos_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Apropos (Unix) (strona nie istnieje)">apropos</a> • <a href="/w/index.php?title=Help_(polecenie)&amp;action=edit&amp;redlink=1" class="new" title="Help (polecenie) (strona nie istnieje)">help</a> • <a class="mw-selflink selflink">man</a></div>
+</td>
+</tr>
+<tr style="height:2px">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style=";;">Różne</td>
+<td style="width:100%;text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list hlist navbox-odd">
+<div style="padding:0em 0.25em"><a href="/wiki/Bc_(Unix)" title="Bc (Unix)">bc</a> • <a href="/wiki/Dc_(informatyka)" title="Dc (informatyka)">dc</a> • <a href="/wiki/Cal_(Unix)" title="Cal (Unix)">cal</a> • <a href="/w/index.php?title=Expr&amp;action=edit&amp;redlink=1" class="new" title="Expr (strona nie istnieje)">expr</a> • <a href="/wiki/False_(Unix)" title="False (Unix)">false</a> • <a href="/wiki/Lp_(Unix)" title="Lp (Unix)">lp</a> • <a href="/w/index.php?title=Od_(Unix)&amp;action=edit&amp;redlink=1" class="new" title="Od (Unix) (strona nie istnieje)">od</a> • <a href="/wiki/Sleep_(Unix)" title="Sleep (Unix)">sleep</a> • <a href="/wiki/True_(Unix)" title="True (Unix)">true</a></div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+
+<!-- 
+NewPP limit report
+Parsed by mw1183
+Cached time: 20170710174354
+Cache expiry: 2592000
+Dynamic content: false
+CPU time usage: 0.076 seconds
+Real time usage: 0.114 seconds
+Preprocessor visited node count: 929/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 25693/2097152 bytes
+Template argument size: 8018/2097152 bytes
+Highest expansion depth: 9/40
+Expensive parser function count: 1/500
+Lua time usage: 0.013/10.000 seconds
+Lua memory usage: 1.09 MB/50 MB
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%   84.766      1 -total
+ 35.77%   30.324      1 Szablon:Polecenia_Unix
+ 32.67%   27.692      1 Szablon:Ang.
+ 32.67%   27.689      1 Szablon:Navbox
+ 30.38%   25.753      1 Szablon:W_języku
+ 14.74%   12.491      1 Szablon:Klawisz
+ 13.98%   11.851      1 Szablon:Wikibooks
+ 12.25%   10.382      1 Szablon:Projekt_siostrzany
+ 11.67%    9.895      1 Szablon:Klawisz/core
+  9.13%    7.739      1 Szablon:Ikona
+-->
+</div>
+<!-- Saved in parser cache with key plwiki:stable-pcache:idhash:819786-0!canonical and timestamp 20170710174354 and revision id 49403315
+ -->
+<noscript><img src="//pl.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" alt="" title="" width="1" height="1" style="border: none; position: absolute;" /></noscript></div>					<div class="printfooter">
+						Źródło: „<a dir="ltr" href="https://pl.wikipedia.org/w/index.php?title=Man_(Unix)&amp;oldid=49403315">https://pl.wikipedia.org/w/index.php?title=Man_(Unix)&amp;oldid=49403315</a>”					</div>
+				<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="/wiki/Specjalna:Kategorie" title="Specjalna:Kategorie">Kategoria</a>: <ul><li><a href="/wiki/Kategoria:Polecenia_Unix" title="Kategoria:Polecenia Unix">Polecenia Unix</a></li></ul></div></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Menu nawigacyjne</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Narzędzia osobiste</h3>
+						<ul>
+							<li id="pt-anonuserpage">Nie jesteś zalogowany</li><li id="pt-anontalk"><a href="/wiki/Specjalna:Moja_dyskusja" title="Dyskusja użytkownika dla tego adresu IP [n]" accesskey="n">Dyskusja</a></li><li id="pt-anoncontribs"><a href="/wiki/Specjalna:M%C3%B3j_wk%C5%82ad" title="Lista edycji wykonanych z tego adresu IP [y]" accesskey="y">Edycje</a></li><li id="pt-createaccount"><a href="/w/index.php?title=Specjalna:Utw%C3%B3rz_konto&amp;returnto=Man+%28Unix%29" title="Zachęcamy do stworzenia konta i zalogowania, ale nie jest to obowiązkowe.">Utwórz konto</a></li><li id="pt-login"><a href="/w/index.php?title=Specjalna:Zaloguj&amp;returnto=Man+%28Unix%29" title="Zachęcamy do zalogowania się, choć nie jest to obowiązkowe. [o]" accesskey="o">Zaloguj się</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Przestrzenie nazw</h3>
+						<ul>
+															<li  id="ca-nstab-main" class="selected"><span><a href="/wiki/Man_(Unix)"  title="Zobacz stronę treści [c]" accesskey="c">Artykuł</a></span></li>
+															<li  id="ca-talk" class="new"><span><a href="/w/index.php?title=Dyskusja:Man_(Unix)&amp;action=edit&amp;redlink=1"  title="Dyskusja o zawartości tej strony [t]" accesskey="t" rel="discussion">Dyskusja</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Warianty</span><div></div>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Widok</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="/wiki/Man_(Unix)" >Czytaj</a></span></li>
+															<li id="ca-edit"><span><a href="/w/index.php?title=Man_(Unix)&amp;action=edit"  title="Edytuj tę stronę [e]" accesskey="e">Edytuj</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="/w/index.php?title=Man_(Unix)&amp;action=history"  title="Starsze wersje tej strony. [h]" accesskey="h">Historia i autorzy</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>Więcej</span><div></div></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Szukaj</label>
+						</h3>
+
+						<form action="/w/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input type="search" name="search" placeholder="Przeszukaj Wikipedię" title="Przeszukaj Wikipedię [f]" accesskey="f" id="searchInput"/><input type="hidden" value="Specjalna:Szukaj" name="title"/><input type="submit" name="fulltext" value="Szukaj" title="Szukaj wprowadzonego tekstu w treści stron" id="mw-searchButton" class="searchButton mw-fallbackSearchButton"/><input type="submit" name="go" value="Przejdź" title="Przejdź do strony o dokładnie takim tytule, o ile istnieje" id="searchButton" class="searchButton"/>							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/Wikipedia:Strona_g%C5%82%C3%B3wna"  title="Strona główna"></a></div>
+						<div class="portal" role="navigation" id='p-navigation' aria-labelledby='p-navigation-label'>
+			<h3 id='p-navigation-label'>Nawigacja</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage-description"><a href="/wiki/Wikipedia:Strona_g%C5%82%C3%B3wna" title="Przejdź na stronę główną [z]" accesskey="z">Strona główna</a></li><li id="n-randompage"><a href="/wiki/Specjalna:Losowa_strona" title="Załaduj losową stronę [x]" accesskey="x">Losuj artykuł</a></li><li id="n-Kategorie"><a href="/wiki/Portal:Kategorie_G%C5%82%C3%B3wne">Kategorie artykułów</a></li><li id="n-Featured-articles"><a href="/wiki/Wikipedia:Wyr%C3%B3%C5%BCniona_zawarto%C5%9B%C4%87_Wikipedii">Najlepsze artykuły</a></li><li id="n-FAQ"><a href="/wiki/Pomoc:FAQ">Częste pytania (FAQ)</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-zmiany' aria-labelledby='p-zmiany-label'>
+			<h3 id='p-zmiany-label'>Dla czytelników</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-czytelnicy"><a href="/wiki/Wikipedia:O_Wikipedii">O Wikipedii</a></li><li id="n-bug_in_article"><a href="/wiki/Wikipedia:Zg%C5%82o%C5%9B_b%C5%82%C4%85d_w_artykule">Zgłoś błąd</a></li><li id="n-bad-image"><a href="/wiki/Wikipedia:Zg%C5%82oszone_grafiki">Zgłoś błąd w pliku</a></li><li id="n-contact"><a href="/wiki/Wikipedia:Kontakt_z_wikipedystami">Kontakt</a></li><li id="n-sitesupport"><a href="//donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_pl.wikipedia.org&amp;uselang=pl" title="Pomóż nam">Wspomóż Wikipedię</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-edytorzy' aria-labelledby='p-edytorzy-label'>
+			<h3 id='p-edytorzy-label'>Dla wikipedystów</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-pierwsze-kroki"><a href="/wiki/Pomoc:Pierwsze_kroki">Pierwsze kroki</a></li><li id="n-portal"><a href="/wiki/Wikipedia:Portal_wikipedyst%C3%B3w" title="O projekcie - co możesz zrobić, gdzie możesz znaleźć informacje">Portal wikipedystów</a></li><li id="n-Noticeboard"><a href="/wiki/Wikipedia:Tablica_og%C5%82osze%C5%84">Ogłoszenia</a></li><li id="n-Guidelines"><a href="/wiki/Wikipedia:Zasady">Zasady</a></li><li id="n-helppage-name"><a href="/wiki/Pomoc:Spis_tre%C5%9Bci">Pomoc</a></li><li id="n-recentchanges"><a href="/wiki/Specjalna:Ostatnie_zmiany" title="Lista ostatnich zmian w Wikipedii. [r]" accesskey="r">Ostatnie zmiany</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Narzędzia</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-whatlinkshere"><a href="/wiki/Specjalna:Linkuj%C4%85ce/Man_(Unix)" title="Pokaż listę wszystkich stron linkujących do tej strony [j]" accesskey="j">Linkujące</a></li><li id="t-recentchangeslinked"><a href="/wiki/Specjalna:Zmiany_w_linkowanych/Man_(Unix)" rel="nofollow" title="Ostatnie zmiany w stronach, do których ta strona linkuje [k]" accesskey="k">Zmiany w linkowanych</a></li><li id="t-upload"><a href="//pl.wikipedia.org/wiki/Wikipedia:Prześlij_plik" title="Prześlij pliki [u]" accesskey="u">Prześlij plik</a></li><li id="t-specialpages"><a href="/wiki/Specjalna:Strony_specjalne" title="Lista wszystkich specjalnych stron [q]" accesskey="q">Strony specjalne</a></li><li id="t-permalink"><a href="/w/index.php?title=Man_(Unix)&amp;oldid=49403315" title="Stały link do tej wersji strony">Link do tej wersji</a></li><li id="t-info"><a href="/w/index.php?title=Man_(Unix)&amp;action=info" title="Więcej informacji na temat tej strony">Informacje o tej stronie</a></li><li id="t-wikibase"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q709369" title="Link do powiązanego elementu w repozytorium danych [g]" accesskey="g">Element Wikidanych</a></li><li id="t-cite"><a href="/w/index.php?title=Specjalna:Cytuj&amp;page=Man_%28Unix%29&amp;id=49403315" title="Informacja o tym jak należy cytować tę stronę">Cytowanie tego artykułu</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-coll-print_export' aria-labelledby='p-coll-print_export-label'>
+			<h3 id='p-coll-print_export-label'>Drukuj lub eksportuj</h3>
+
+			<div class="body">
+									<ul>
+						<li id="coll-create_a_book"><a href="/w/index.php?title=Specjalna:Ksi%C4%85%C5%BCka&amp;bookcmd=book_creator&amp;referer=Man+%28Unix%29">Utwórz książkę</a></li><li id="coll-download-as-rdf2latex"><a href="/w/index.php?title=Specjalna:ElectronPdf&amp;page=Man+%28Unix%29&amp;action=show-selection-screen&amp;coll-download-url=%2Fw%2Findex.php%3Ftitle%3DSpecjalna%3AKsi%25C4%2585%25C5%25BCka%26bookcmd%3Drender_article%26arttitle%3DMan%2B%2528Unix%2529%26returnto%3DMan%2B%2528Unix%2529%26oldid%3D49403315%26writer%3Drdf2latex">Pobierz jako PDF</a></li><li id="t-print"><a href="/w/index.php?title=Man_(Unix)&amp;printable=yes" title="Wersja do wydruku [p]" accesskey="p">Wersja do druku</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-lang' aria-labelledby='p-lang-label'>
+			<h3 id='p-lang-label'>W innych językach</h3>
+
+			<div class="body">
+									<ul>
+						<li class="interlanguage-link interwiki-ar"><a href="https://ar.wikipedia.org/wiki/%D8%B5%D9%81%D8%AD%D8%A9_%D8%AF%D9%84%D9%8A%D9%84_(%D9%8A%D9%88%D9%86%D9%83%D8%B3)" title="صفحة دليل (يونكس) – arabski" lang="ar" hreflang="ar" class="interlanguage-link-target">العربية</a></li><li class="interlanguage-link interwiki-ca"><a href="https://ca.wikipedia.org/wiki/Man_(Unix)" title="Man (Unix) – kataloński" lang="ca" hreflang="ca" class="interlanguage-link-target">Català</a></li><li class="interlanguage-link interwiki-cs"><a href="https://cs.wikipedia.org/wiki/Manu%C3%A1lov%C3%A1_str%C3%A1nka_(Unix)" title="Manuálová stránka (Unix) – czeski" lang="cs" hreflang="cs" class="interlanguage-link-target">Čeština</a></li><li class="interlanguage-link interwiki-da"><a href="https://da.wikipedia.org/wiki/Man_page" title="Man page – duński" lang="da" hreflang="da" class="interlanguage-link-target">Dansk</a></li><li class="interlanguage-link interwiki-de"><a href="https://de.wikipedia.org/wiki/Manpage" title="Manpage – niemiecki" lang="de" hreflang="de" class="interlanguage-link-target">Deutsch</a></li><li class="interlanguage-link interwiki-en"><a href="https://en.wikipedia.org/wiki/Man_page" title="Man page – angielski" lang="en" hreflang="en" class="interlanguage-link-target">English</a></li><li class="interlanguage-link interwiki-es"><a href="https://es.wikipedia.org/wiki/Man_(Unix)" title="Man (Unix) – hiszpański" lang="es" hreflang="es" class="interlanguage-link-target">Español</a></li><li class="interlanguage-link interwiki-eo"><a href="https://eo.wikipedia.org/wiki/Man_(programo)" title="Man (programo) – esperanto" lang="eo" hreflang="eo" class="interlanguage-link-target">Esperanto</a></li><li class="interlanguage-link interwiki-fa"><a href="https://fa.wikipedia.org/wiki/%D8%B5%D9%81%D8%AD%D9%87_%D8%B1%D8%A7%D9%87%D9%86%D9%85%D8%A7" title="صفحه راهنما – perski" lang="fa" hreflang="fa" class="interlanguage-link-target">فارسی</a></li><li class="interlanguage-link interwiki-fr"><a href="https://fr.wikipedia.org/wiki/Man_(Unix)" title="Man (Unix) – francuski" lang="fr" hreflang="fr" class="interlanguage-link-target">Français</a></li><li class="interlanguage-link interwiki-ko"><a href="https://ko.wikipedia.org/wiki/Man_page" title="Man page – koreański" lang="ko" hreflang="ko" class="interlanguage-link-target">한국어</a></li><li class="interlanguage-link interwiki-it"><a href="https://it.wikipedia.org/wiki/Man_(Unix)" title="Man (Unix) – włoski" lang="it" hreflang="it" class="interlanguage-link-target">Italiano</a></li><li class="interlanguage-link interwiki-he"><a href="https://he.wikipedia.org/wiki/Man_(%D7%99%D7%95%D7%A0%D7%99%D7%A7%D7%A1)" title="Man (יוניקס) – hebrajski" lang="he" hreflang="he" class="interlanguage-link-target">עברית</a></li><li class="interlanguage-link interwiki-ka"><a href="https://ka.wikipedia.org/wiki/Man_(%E1%83%98%E1%83%A3%E1%83%9C%E1%83%98%E1%83%A5%E1%83%A1%E1%83%98)" title="Man (იუნიქსი) – gruziński" lang="ka" hreflang="ka" class="interlanguage-link-target">ქართული</a></li><li class="interlanguage-link interwiki-hu"><a href="https://hu.wikipedia.org/wiki/Man_(Unix)" title="Man (Unix) – węgierski" lang="hu" hreflang="hu" class="interlanguage-link-target">Magyar</a></li><li class="interlanguage-link interwiki-ms"><a href="https://ms.wikipedia.org/wiki/Laman_manual_(Unix)" title="Laman manual (Unix) – malajski" lang="ms" hreflang="ms" class="interlanguage-link-target">Bahasa Melayu</a></li><li class="interlanguage-link interwiki-ja"><a href="https://ja.wikipedia.org/wiki/Man%E3%83%9A%E3%83%BC%E3%82%B8" title="Manページ – japoński" lang="ja" hreflang="ja" class="interlanguage-link-target">日本語</a></li><li class="interlanguage-link interwiki-no"><a href="https://no.wikipedia.org/wiki/Man_(Unix)" title="Man (Unix) – norweski" lang="no" hreflang="no" class="interlanguage-link-target">Norsk bokmål</a></li><li class="interlanguage-link interwiki-pt"><a href="https://pt.wikipedia.org/wiki/Man_(Unix)" title="Man (Unix) – portugalski" lang="pt" hreflang="pt" class="interlanguage-link-target">Português</a></li><li class="interlanguage-link interwiki-ro"><a href="https://ro.wikipedia.org/wiki/Man_(Unix)" title="Man (Unix) – rumuński" lang="ro" hreflang="ro" class="interlanguage-link-target">Română</a></li><li class="interlanguage-link interwiki-ru"><a href="https://ru.wikipedia.org/wiki/Man" title="Man – rosyjski" lang="ru" hreflang="ru" class="interlanguage-link-target">Русский</a></li><li class="interlanguage-link interwiki-fi"><a href="https://fi.wikipedia.org/wiki/Man-sivut" title="Man-sivut – fiński" lang="fi" hreflang="fi" class="interlanguage-link-target">Suomi</a></li><li class="interlanguage-link interwiki-sv"><a href="https://sv.wikipedia.org/wiki/Man_(Unix)" title="Man (Unix) – szwedzki" lang="sv" hreflang="sv" class="interlanguage-link-target">Svenska</a></li><li class="interlanguage-link interwiki-tr"><a href="https://tr.wikipedia.org/wiki/Man_(elkitab%C4%B1)_sayfas%C4%B1" title="Man (elkitabı) sayfası – turecki" lang="tr" hreflang="tr" class="interlanguage-link-target">Türkçe</a></li><li class="interlanguage-link interwiki-uk"><a href="https://uk.wikipedia.org/wiki/Man" title="Man – ukraiński" lang="uk" hreflang="uk" class="interlanguage-link-target">Українська</a></li><li class="interlanguage-link interwiki-zh"><a href="https://zh.wikipedia.org/wiki/%E6%89%8B%E5%86%8C%E9%A1%B5" title="手册页 – chiński" lang="zh" hreflang="zh" class="interlanguage-link-target">中文</a></li>					</ul>
+				<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q709369#sitelinks-wikipedia" title="Edytuj linki pomiędzy wersjami językowymi" class="wbc-editpage">Edytuj linki</a></span></div>			</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> Tę stronę ostatnio edytowano 02:25, 21 maj 2017.</li>
+											<li id="footer-info-copyright">Tekst udostępniany na <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.pl">licencji Creative Commons: uznanie autorstwa, na tych samych warunkach</a>, z możliwością obowiązywania dodatkowych ograniczeń.
+Zobacz szczegółowe informacje o <a href="https://wikimediafoundation.org/wiki/Warunki_korzystania">warunkach korzystania</a>.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="https://wikimediafoundation.org/wiki/Privacy_policy" class="extiw" title="wmf:Privacy policy">Polityka ochrony prywatności</a></li>
+											<li id="footer-places-about"><a href="/wiki/Wikipedia:O_Wikipedii" title="Wikipedia:O Wikipedii">O Wikipedii</a></li>
+											<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:Korzystasz_z_Wikipedii_tylko_na_w%C5%82asn%C4%85_odpowiedzialno%C5%9B%C4%87" title="Wikipedia:Korzystasz z Wikipedii tylko na własną odpowiedzialność">Korzystasz z Wikipedii tylko na własną odpowiedzialność</a></li>
+											<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Dla deweloperów</a></li>
+											<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">Komunikat na temat ciasteczek</a></li>
+											<li id="footer-places-mobileview"><a href="//pl.m.wikipedia.org/w/index.php?title=Man_(Unix)&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Wersja dla urządzeń mobilnych</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+							<a href="https://wikimediafoundation.org/"><img src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"/></a>						</li>
+											<li id="footer-poweredbyico">
+							<a href="//www.mediawiki.org/"><img src="/static/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.076","walltime":"0.114","ppvisitednodes":{"value":929,"limit":1000000},"ppgeneratednodes":{"value":0,"limit":1500000},"postexpandincludesize":{"value":25693,"limit":2097152},"templateargumentsize":{"value":8018,"limit":2097152},"expansiondepth":{"value":9,"limit":40},"expensivefunctioncount":{"value":1,"limit":500},"entityaccesscount":{"value":0,"limit":400},"timingprofile":["100.00%   84.766      1 -total"," 35.77%   30.324      1 Szablon:Polecenia_Unix"," 32.67%   27.692      1 Szablon:Ang."," 32.67%   27.689      1 Szablon:Navbox"," 30.38%   25.753      1 Szablon:W_języku"," 14.74%   12.491      1 Szablon:Klawisz"," 13.98%   11.851      1 Szablon:Wikibooks"," 12.25%   10.382      1 Szablon:Projekt_siostrzany"," 11.67%    9.895      1 Szablon:Klawisz/core","  9.13%    7.739      1 Szablon:Ikona"]},"scribunto":{"limitreport-timeusage":{"value":"0.013","limit":"10.000"},"limitreport-memusage":{"value":1146090,"limit":52428800}},"cachereport":{"origin":"mw1183","timestamp":"20170710174354","ttl":2592000,"transientcontent":false}}});});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":214,"wgHostname":"mw1183"});});</script>
+	</body>
+</html>
