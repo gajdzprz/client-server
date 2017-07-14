@@ -10,8 +10,12 @@ git clone git@github.com:gajdzprz/client-server.git name_of_your_folder
 
 ## How to compile project
 
+before you start compile project you need to clone jsmn
 ```
-gcc server.c -o server
+git clone https://github.com/zserge/jsmn jsmn
+```
+```
+gcc server.c -L ../jsmn/ -l:libjsmn.a -o server
 gcc client.c -o client
 ```
 
