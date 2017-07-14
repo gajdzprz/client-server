@@ -51,7 +51,6 @@ int main(int argc, char *argv[])
 		perror("listen error");
 		exit(1);
 	}
-
 	size = sizeof(struct sockaddr_in);
 	client_socket = accept(server_socket, (struct sockaddr *)&client_addr, &size);
 	if (client_socket == -1)
@@ -60,14 +59,12 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	printf("server: got connection from %s\n", inet_ntoa(client_addr.sin_addr));
-
-	
 	char buf[100], login[100], haslo[100], js[100];
 	memset(js,'\0',sizeof(js));
-  memset(buf,'\0', sizeof(buf));
+  	memset(buf,'\0', sizeof(buf));
 	memset(login,'\0', sizeof(login));
 	memset(haslo,'\0', sizeof(haslo));
-  int numbytes;
+  	int numbytes;
 	numbytes = recv(client_socket, js, 99, 0);
 	if (numbytes == -1)
 	{
@@ -82,7 +79,6 @@ int main(int argc, char *argv[])
 	{
 		printf("js:%s\n",js);
 	}
-
 	jsmn_parser parser;
 	jsmn_init(&parser);
 	jsmntok_t tokens[5];
@@ -94,14 +90,11 @@ int main(int argc, char *argv[])
 
 	strncat(login,js + tokens[2].start, tokens[2].end - tokens[2].start);
 	strncat(haslo,js + tokens[4].start, tokens[4].end - tokens[4].start);
-  
-  int i = checklog(client_socket, login,  haslo); 
-
+  	int i = checklog(client_socket, login,  haslo); 
 		if( i == -1)
 		{
 			if (sendall(client_socket, "TAK\n") == -1)
 			{
-			
 				perror("sendall error");
 			}
 		}
@@ -109,17 +102,13 @@ int main(int argc, char *argv[])
 		{
 			if (sendall(client_socket, "NIE\n") == -1)
 			{
-		
 				perror("sendall error");
 			}
 		}
-  close(client_socket);
+  	close(client_socket);
 	close(server_socket);
-  return 0;
+  	return 0;
 }
-
-
-
 int checklog(int client_socket, char *login, char *haslo)
 {
 typedef enum  {true = 1, false = 0} bool;
@@ -192,4 +181,3 @@ int sendall(int client_socket, char *buf)
 
 	return (sent_bytes == -1) ? -1 : 0;
 }
-
