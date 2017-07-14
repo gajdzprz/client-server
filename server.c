@@ -62,7 +62,10 @@ int main(int argc, char *argv[])
 
 	int numbytes;
 	char buf[100], login[100], haslo[100];
-
+	memset(buf,'\0', sizeof(buf));
+	memset(login,'\0', sizeof(login));
+	memset(haslo,'\0', sizeof(haslo));
+	
 	numbytes = recv(client_socket, login, 99, 0);
 	if (numbytes == -1)
 	{
@@ -163,7 +166,7 @@ bool find = false;
                 printf("\nNot found\n");
         }
  }
-        //fclose(file);
+        fclose(file);
  	if(find == true) 
 	{
 		return (-1);
@@ -174,7 +177,7 @@ bool find = false;
 	}
 
   	 
-		fclose(file);
+		//fclose(file);
 }
 
 int sendall(int client_socket, char *buf)
