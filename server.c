@@ -94,23 +94,26 @@ int main(int argc, char *argv[])
 
 	strncat(login,json_response + tokens[2].start, tokens[2].end - tokens[2].start);
 	strncat(haslo,json_response + tokens[4].start, tokens[4].end - tokens[4].start);
+	memset(json_request, '\0', sizeof(json_request));
+	strcat(json_request, "{\"checklog\": ");
 	int log = checklog(login,  haslo);
 	if( log == 0)
 	{
-		if (sendall(client_socket, "TAK\n") == -1)
+		strcat(json_request, "\"tak\"}");
+		if (sendall(client_socket, json_request) == -1)
 		{
 			perror("sendall error");
 		}
-	printf("send:TAK\n");
 	}
 	else
 	{
-		if (sendall(client_socket, "NIE\n") == -1)
+		strcat(json_request, "\"nie\"}");
+		if (sendall(client_socket, json_request) == -1)
 		{
 			perror("sendall error");
 		}
-	printf("send:NIE\n");
 	}
+	printf("send:%s\n", json_request);
 
 	memset(json_response,'\0',sizeof(json_response));
 	numbytes = recv(client_socket, json_response, 99, 0);
