@@ -17,7 +17,6 @@
 #define MAXDATASIZE 100
 
 int sendall(int client_socket, char *buf);
-
 int main(int argc, char *argv[])
 {
 	int server_socket, client_socket;
@@ -55,7 +54,6 @@ int main(int argc, char *argv[])
 		perror("listen error");
 		exit(1);
 	}
-
 	size = sizeof(struct sockaddr_in);
 	client_socket = accept(server_socket, (struct sockaddr *)&client_addr, &size);
 	if (client_socket == -1)
@@ -64,11 +62,13 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	printf("server: got connection from %s\n", inet_ntoa(client_addr.sin_addr));
-
-	int numbytes;
 	char buf[100], login[100], haslo[100], js[100];
-	memset(json_response,'\0',sizeof(json_response));
 
+	memset(json_response,'\0',sizeof(json_response));
+  memset(buf,'\0', sizeof(buf));
+	memset(login,'\0', sizeof(login));
+	memset(haslo,'\0', sizeof(haslo));
+  int numbytes;
 	numbytes = recv(client_socket, json_response, 99, 0);
 	if (numbytes == -1)
 	{
@@ -83,7 +83,6 @@ int main(int argc, char *argv[])
 	{
 		printf("recv:%s\n",json_response); // later can be removed
 	}
-
 	jsmn_parser parser;
 	jsmn_init(&parser);
 	jsmntok_t tokens[5];
@@ -95,24 +94,23 @@ int main(int argc, char *argv[])
 
 	strncat(login,json_response + tokens[2].start, tokens[2].end - tokens[2].start);
 	strncat(haslo,json_response + tokens[4].start, tokens[4].end - tokens[4].start);
-
-	// TO DO: instead of this, implement checking user from file
-	if ((strcmp(login, "maslo") && strcmp(haslo, "qwerty")) == 0)
-	{
-		if (sendall(client_socket, "TAK\n") == -1)
+  int log = checklog(client_socket, login,  haslo); 
+		if( log == -1)
 		{
-			perror("sendall error");
-		}
+			if (sendall(client_socket, "TAK\n") == -1)
+			{
+				perror("sendall error");
+			}
 		printf("send:TAK\n");
-	}
-	else
-	{
-		if (sendall(client_socket, "NIE\n") == -1)
-		{
-			perror("sendall error");
 		}
+		else
+		{
+			if (sendall(client_socket, "NIE\n") == -1)
+			{
+				perror("sendall error");
+			}
 		printf("send:NIE\n");
-	}
+		}
 
 	memset(json_response,'\0',sizeof(json_response));
 	numbytes = recv(client_socket, json_response, 99, 0);
@@ -163,8 +161,59 @@ int main(int argc, char *argv[])
 
 	close(client_socket);
 	close(server_socket);
+  return 0;
+}
 
-	return 0;
+int checklog(int client_socket, char *login, char *haslo)
+{
+typedef enum  {true = 1, false = 0} bool;
+char const* const logins;
+FILE *file = fopen("logins", "r");
+char line[512];
+char *search = " "; 
+char *log;
+bool find = false;
+ while (fgets(line, sizeof(line), file))
+ {
+        log = strtok(line, search);
+        while( log != NULL )
+        {
+                if((strcmp(log, login)) == 0)
+                {
+                        printf("\n%s", log);
+                        log = strtok(NULL, search);
+                        continue;
+                }
+                else if((strcmp(log, haslo)) == 0)
+                {
+                        printf("\n%s", log);
+                        find = true;
+                        break;
+                }
+                else
+                {
+                break;
+                }
+        }
+	if(find == true)
+        {
+                printf("\nFound\n");
+                break;
+        }
+        else
+        {
+                printf("\nNot found\n");
+        }
+ }
+        fclose(file);
+ 	if(find == true) 
+	{
+		return (-1);
+	}
+	else
+	{
+		return (0);
+	}		
 }
 
 int sendall(int client_socket, char * json_request)
