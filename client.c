@@ -87,10 +87,33 @@ int main(int argc, char *argv[])
 	else if (numbytes == 0)
 	{
 		printf("Lost connection, server disconnected\n");
+		exit(1);
 	}
 	else
 	{
-		printf("recv:%s",json_response);
+		printf("recv:%s\n",json_response);
+		jsmn_parser parser;
+		jsmn_init(&parser);
+		jsmntok_t tokens[5];
+		if (jsmn_parse(&parser, json_response, strlen(json_response), tokens, 10) < 0)
+		{
+			printf("jsmn_parse error\n");
+			exit(1);
+		}
+		else
+		{
+			strncat(buf, json_response + tokens[2].start, tokens[2].end - tokens[2].start);
+			if ((strcmp(buf, "tak")) == 0)
+			{
+				printf("log on\n");
+			}
+			else
+			{
+				printf("not log on\n");
+				exit(1);
+			}
+			memset(buf, '\0', sizeof(buf));
+		}
 	}
 	memset(json_response, '\0', sizeof(json_request));
 
