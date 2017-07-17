@@ -16,7 +16,8 @@
 #define MAXUSERS 5
 #define MAXDATASIZE 100
 
-int sendall(int client_socket, char *buf);
+int checklog(char *login, char *haslo);
+int sendall(int client_socket, char *json_request);
 int main(int argc, char *argv[])
 {
 	int server_socket, client_socket;
@@ -62,17 +63,16 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	printf("server: got connection from %s\n", inet_ntoa(client_addr.sin_addr));
-	char buf[100], login[100], haslo[100], js[100];
+	char login[100], haslo[100];
 
 	memset(json_response,'\0',sizeof(json_response));
- 	memset(buf,'\0', sizeof(buf));
 	memset(login,'\0', sizeof(login));
 	memset(haslo,'\0', sizeof(haslo));
   	int numbytes;
 	numbytes = recv(client_socket, json_response, 99, 0);
 	if (numbytes == -1)
 	{
-		perror("js error");
+		perror("json_response error");
 		exit(1);
 	}
 	else if (numbytes == 0)
@@ -94,23 +94,23 @@ int main(int argc, char *argv[])
 
 	strncat(login,json_response + tokens[2].start, tokens[2].end - tokens[2].start);
 	strncat(haslo,json_response + tokens[4].start, tokens[4].end - tokens[4].start);
-  	int log = checklog(client_socket, login,  haslo); 
-		if( log == -1)
+	int log = checklog(login,  haslo);
+	if( log == 0)
+	{
+		if (sendall(client_socket, "TAK\n") == -1)
 		{
-			if (sendall(client_socket, "TAK\n") == -1)
-			{
-				perror("sendall error");
-			}
-		printf("send:TAK\n");
+			perror("sendall error");
 		}
-		else
+	printf("send:TAK\n");
+	}
+	else
+	{
+		if (sendall(client_socket, "NIE\n") == -1)
 		{
-			if (sendall(client_socket, "NIE\n") == -1)
-			{
-				perror("sendall error");
-			}
-		printf("send:NIE\n");
+			perror("sendall error");
 		}
+	printf("send:NIE\n");
+	}
 
 	memset(json_response,'\0',sizeof(json_response));
 	numbytes = recv(client_socket, json_response, 99, 0);
@@ -164,56 +164,39 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-int checklog(int client_socket, char *login, char *haslo)
+int checklog(char *login, char *haslo)
 {
-typedef enum  {true = 1, false = 0} bool;
-char const* const logins;
-FILE *file = fopen("logins", "r");
-char line[512];
-char *search = " "; 
-char *log;
-bool find = false;
- while (fgets(line, sizeof(line), file))
- {
-        log = strtok(line, search);
-        while( log != NULL )
-        {
-                if((strcmp(log, login)) == 0)
-                {
-                        printf("\n%s", log);
-                        log = strtok(NULL, search);
-                        continue;
-                }
-                else if((strcmp(log, haslo)) == 0)
-                {
-                        printf("\n%s", log);
-                        find = true;
-                        break;
-                }
-                else
-                {
-                break;
-                }
-        }
-	if(find == true)
-        {
-                printf("\nFound\n");
-                break;
-        }
-        else
-        {
-                printf("\nNot found\n");
-        }
- }
-        fclose(file);
- 	if(find == true) 
+	char const* const logins = "logins"; //not needed? or use instead of "logins"?
+	FILE *file = fopen(logins, "r");
+	char line[512];
+	char *search = " ";
+	char *log;
+	while (fgets(line, sizeof(line), file))
 	{
-		return (-1);
+		log = strtok(line, search);
+		while( log != NULL )
+		{
+			if((strcmp(log, login)) == 0)
+			{
+				printf("login found:%s\n", log);
+				log = strtok(NULL, search);
+				continue;
+			}
+			else if((strcmp(log, haslo)) == 0)
+			{
+				printf("password found:%s\n", log);
+				printf("Found\n");
+				return 0;
+			}
+			else
+			{
+				break;
+			}
+		}
 	}
-	else
-	{
-		return (0);
-	}		
+        fclose(file);
+	printf("Not found\n");
+	return -1;
 }
 
 int sendall(int client_socket, char * json_request)
