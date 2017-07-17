@@ -8,16 +8,19 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+// jsmn include
+#include "../jsmn/jsmn.h"
+
 #define PORT 8081
 #define MAXDATASIZE 100
 
 void display_menu(void);
-void display_files(void);
+void display_files(char * json);
 
 int main(int argc, char *argv[])
 {
 	int client_socket, numbytes;
-	char buf[MAXDATASIZE];
+	char buf[MAXDATASIZE], json_request[MAXDATASIZE], json_response[MAXDATASIZE];
 	struct hostent *host;
 	struct sockaddr_in their_addr;
 
@@ -51,30 +54,31 @@ int main(int argc, char *argv[])
 	}
 
 	// creating json login
-	char js[100] = "{\"login\": \"";
+	memset(json_request, '\0', sizeof(json_request));
+	strcat(json_request, "{\"login\": \"");
 
 	printf("Podaj login:");
 	scanf("%s",buf);
 
-	strcat(js,buf);
+	strcat(json_request,buf);
 
 	memset(buf,'\0', sizeof(buf));
 
 	printf("Podaj haslo:");
 	scanf("%s",buf);
 
-	strcat(js,"\", \"password\": \"");
-	strcat(js,buf);
+	strcat(json_request,"\", \"password\": \"");
+	strcat(json_request,buf);
 
-	strcat(js,"\"}");
+	strcat(json_request,"\"}");
 
-	printf("json:%s\n",js);
+	printf("send:%s\n",json_request);
 
-	send(client_socket, js, strlen(js), 0);
+	send(client_socket, json_request, strlen(json_request), 0);
 	memset(buf,'\0', sizeof(buf));
-	memset(js,'\0', sizeof(buf));
+	memset(json_request,'\0', sizeof(json_request));
 
-	numbytes = recv(client_socket,buf,MAXDATASIZE-1,0);
+	numbytes = recv(client_socket,json_response,MAXDATASIZE-1,0);
 	if (numbytes == -1)
 	{
 		perror("Sign in error");
@@ -86,16 +90,26 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("%s",buf);
+		printf("recv:%s",json_response);
 	}
+	memset(json_response, '\0', sizeof(json_request));
 
 	int choice;
 	display_menu();
 	scanf("%d", &choice);
+	strcat(json_request,"{\"choice\": \"");
+	char choice_char[1];
+	sprintf(choice_char, "%d", choice);
+	strcat(json_request,choice_char);
+	strcat(json_request,"\"}");
 
 	if (choice > 0 && choice < 4)
 	{
-		display_files();
+		send(client_socket, json_request, strlen(json_request),0);
+		printf("send:%s\n",json_request);
+		memset(json_request,'\0',sizeof(json_request));
+		int numb = recv(client_socket, json_response, 99, 0);
+		display_files(json_response);
 		// TO DO: next if statement with choice of which file 
 		// want to download or remove
 	}
@@ -123,11 +137,20 @@ void display_menu(void)
 }
 
 // TO DO: download from server list of files
-void display_files(void)
+void display_files(char * json_response)
 {
+	printf("recv:%s\n",json_response);
+	jsmn_parser parser;
+	jsmn_init(&parser);
+	jsmntok_t tokens[100];
+	int num_files = jsmn_parse(&parser, json_response, strlen(json_response), tokens, 100);
+	int i;
 	printf("-------MENU-------\n");
-	printf("abecadlo.txt\n");
-	printf("foto.png\n");
-	printf("index.html\n");
-	printf("etc...\n");
+	for (i = 3; i<num_files; i++)
+	{
+		if (tokens[i].type == JSMN_STRING)
+		{
+			printf("%.*s\n",tokens[i].end - tokens[i].start, json_response + tokens[i].start);
+		}
+	}
 }
