@@ -65,10 +65,10 @@ int main(int argc, char *argv[])
 	char buf[100], login[100], haslo[100], js[100];
 
 	memset(json_response,'\0',sizeof(json_response));
-  memset(buf,'\0', sizeof(buf));
+ 	memset(buf,'\0', sizeof(buf));
 	memset(login,'\0', sizeof(login));
 	memset(haslo,'\0', sizeof(haslo));
-  int numbytes;
+  	int numbytes;
 	numbytes = recv(client_socket, json_response, 99, 0);
 	if (numbytes == -1)
 	{
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 
 	strncat(login,json_response + tokens[2].start, tokens[2].end - tokens[2].start);
 	strncat(haslo,json_response + tokens[4].start, tokens[4].end - tokens[4].start);
-  int log = checklog(client_socket, login,  haslo); 
+  	int log = checklog(client_socket, login,  haslo); 
 		if( log == -1)
 		{
 			if (sendall(client_socket, "TAK\n") == -1)
@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
 
 	close(client_socket);
 	close(server_socket);
-  return 0;
+	return 0;
 }
 
 int checklog(int client_socket, char *login, char *haslo)
