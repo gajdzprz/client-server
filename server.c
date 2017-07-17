@@ -1,4 +1,5 @@
 #include <arpa/inet.h>
+#include <dirent.h>
 #include <errno.h>
 #include <netinet/in.h>
 #include <stdio.h>
@@ -13,12 +14,14 @@
 
 #define PORT 8081
 #define MAXUSERS 5
+#define MAXDATASIZE 100
 
 int sendall(int client_socket, char *buf);
 int main(int argc, char *argv[])
 {
 	int server_socket, client_socket;
 	struct sockaddr_in server_addr, client_addr;
+	char json_request[MAXDATASIZE], json_response[MAXDATASIZE];
 	int size;
 	int yes = 1;
 
@@ -60,12 +63,13 @@ int main(int argc, char *argv[])
 	}
 	printf("server: got connection from %s\n", inet_ntoa(client_addr.sin_addr));
 	char buf[100], login[100], haslo[100], js[100];
-	memset(js,'\0',sizeof(js));
-  	memset(buf,'\0', sizeof(buf));
+
+	memset(json_response,'\0',sizeof(json_response));
+ 	memset(buf,'\0', sizeof(buf));
 	memset(login,'\0', sizeof(login));
 	memset(haslo,'\0', sizeof(haslo));
   	int numbytes;
-	numbytes = recv(client_socket, js, 99, 0);
+	numbytes = recv(client_socket, json_response, 99, 0);
 	if (numbytes == -1)
 	{
 		perror("js error");
@@ -77,19 +81,19 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("js:%s\n",js);
+		printf("recv:%s\n",json_response); // later can be removed
 	}
 	jsmn_parser parser;
 	jsmn_init(&parser);
 	jsmntok_t tokens[5];
-	if (jsmn_parse(&parser, js, strlen(js), tokens, 10) < 0)
+	if (jsmn_parse(&parser, json_response, strlen(json_response), tokens, 10) < 0)
 	{
 		printf("jsmn_parse error\n");
 		exit(1);
 	}
 
-	strncat(login,js + tokens[2].start, tokens[2].end - tokens[2].start);
-	strncat(haslo,js + tokens[4].start, tokens[4].end - tokens[4].start);
+	strncat(login,json_response + tokens[2].start, tokens[2].end - tokens[2].start);
+	strncat(haslo,json_response + tokens[4].start, tokens[4].end - tokens[4].start);
   	int log = checklog(client_socket, login,  haslo); 
 		if( log == -1)
 		{
@@ -97,6 +101,7 @@ int main(int argc, char *argv[])
 			{
 				perror("sendall error");
 			}
+		printf("send:TAK\n");
 		}
 		else
 		{
@@ -104,11 +109,61 @@ int main(int argc, char *argv[])
 			{
 				perror("sendall error");
 			}
+		printf("send:NIE\n");
 		}
-  	close(client_socket);
+
+	memset(json_response,'\0',sizeof(json_response));
+	numbytes = recv(client_socket, json_response, 99, 0);
+	if (numbytes == -1)
+	{
+		perror("json_response error");
+		exit(1);
+	}
+	else if (numbytes == 0)
+	{
+		printf("Lost connection, client disconnected\n");
+	}
+	else
+	{
+		printf("recv:%s\n",json_response); // later can be removed
+	}
+
+	memset(json_response,'\0',sizeof(json_response));
+	memset(json_request, '\0', sizeof(json_request));
+	strcat(json_request,"{\"files\":[ ");
+	DIR *dir;
+	struct dirent *read_dir;
+	dir = opendir("files_on_server/");
+	if (dir)
+	{
+		while ((read_dir = readdir(dir)) != NULL)
+		{
+			// checking whether it is normal file
+			if (read_dir->d_type != DT_REG)
+			{
+				continue;
+			}
+			strcat(json_request,"\"");
+			strcat(json_request,read_dir->d_name);
+			strcat(json_request,"\", ");
+			printf("%s\n", read_dir->d_name);
+		}
+		closedir(dir);
+		strcat(json_request,"]}");
+		printf("send:%s\n",json_request);
+		sendall(client_socket, json_request);
+		memset(json_request,'\0',sizeof(json_request));
+	}
+	else
+	{
+		perror("opendir error:");
+	}
+
+	close(client_socket);
 	close(server_socket);
-  	return 0;
+	return 0;
 }
+
 int checklog(int client_socket, char *login, char *haslo)
 {
 typedef enum  {true = 1, false = 0} bool;
@@ -161,18 +216,18 @@ bool find = false;
 	}		
 }
 
-int sendall(int client_socket, char *buf)
+int sendall(int client_socket, char * json_request)
 {
 	int total_sent = 0;
-	int bytes_left = sizeof(buf);
+	int bytes_left = strlen(json_request);
 	int sent_bytes;
 
-	while(total_sent < sizeof(buf))
+	while(total_sent < strlen(json_request))
 	{
-		sent_bytes = send(client_socket, buf+total_sent, bytes_left, 0);
+		sent_bytes = send(client_socket, json_request+total_sent, bytes_left, 0);
 		if (sent_bytes == -1)
 		{
-			printf("Sent only %d of %lu bytes\n", total_sent, sizeof(buf));
+			printf("Sent only %d of %lu bytes\n", total_sent, sizeof(json_request));
 			break;
 		}
 		total_sent += sent_bytes;
