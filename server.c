@@ -16,8 +16,10 @@
 #define MAXUSERS 5
 #define MAXDATASIZE 100
 
+int recv_choice(int client_socket);
 int checklog(char *login, char *haslo);
 int sendall(int client_socket, char *json_request);
+
 int main(int argc, char *argv[])
 {
 	int server_socket, client_socket;
@@ -115,23 +117,9 @@ int main(int argc, char *argv[])
 	}
 	printf("send:%s\n", json_request);
 
+        /// Sending list of files
 	memset(json_response,'\0',sizeof(json_response));
-	numbytes = recv(client_socket, json_response, 99, 0);
-	if (numbytes == -1)
-	{
-		perror("json_response error");
-		exit(1);
-	}
-	else if (numbytes == 0)
-	{
-		printf("Lost connection, client disconnected\n");
-	}
-	else
-	{
-		printf("recv:%s\n",json_response); // later can be removed
-	}
-
-	memset(json_response,'\0',sizeof(json_response));
+        numbytes = recv_choice(client_socket);
 	memset(json_request, '\0', sizeof(json_request));
 	strcat(json_request,"{\"files\":[ ");
 	DIR *dir;
@@ -162,14 +150,96 @@ int main(int argc, char *argv[])
 		perror("opendir error:");
 	}
 
+        ////////////Sending file///////////////////////
+        int file_number = recv_choice(client_socket);
+        int i = 1;
+        char file_to_send[100] = "files_on_server/";
+        dir = opendir("files_on_server/");
+        if (dir)
+        {
+                while ((read_dir = readdir(dir)) != NULL)
+                {
+                        // checking whether it is normal file
+                        if (read_dir->d_type != DT_REG)
+                        {
+                                continue;
+                        }
+                        else if (file_number == i)
+                        {
+                            strcat(file_to_send,read_dir->d_name);
+                            printf("file_to_send:%s\n", read_dir->d_name);
+                            break;
+                        }
+                        else
+                        {
+                            i++;
+                        }
+                }
+                closedir(dir);
+        }
+        else
+        {
+                perror("opendir error:");
+        }
+
+	// send whole file
+	FILE *fp;
+        fp = fopen(file_to_send,"r");
+	if (fp == NULL)
+	{
+		printf("File not created okay, errno = %d\n", errno);
+	}
+	char buff[MAXDATASIZE];
+	while(fgets(buff, MAXDATASIZE, fp) != NULL)
+	{
+		sendall(client_socket, buff);
+		memset(buff, '\0', sizeof(buff));
+	}
+	fclose(fp);
+        memset(file_to_send,'\0',sizeof(file_to_send));
+        ///////////End of sending////////////////////
+
 	close(client_socket);
 	close(server_socket);
 	return 0;
 }
 
+int recv_choice(int client_socket)
+{
+    char json_response[MAXDATASIZE];
+    int numbyt = recv(client_socket, json_response, 99, 0);
+    if (numbyt == -1)
+    {
+        perror("json_response error");
+        exit(1);
+    }
+    else if (numbyt == 0)
+    {
+        printf("Lost connection, client disconnected\n");
+    }
+    else
+    {
+        printf("recv:%s\n",json_response);
+    }
+    jsmn_parser parser;
+    jsmn_init(&parser);
+    jsmntok_t tokens[3];
+    if ((jsmn_parse(&parser, json_response, strlen(json_response), tokens, 3)) < 0)
+    {
+            printf("jsmn_parse error\n");
+            exit(1);
+    }
+    char choice_char[3];
+    memset(choice_char,'\0',sizeof(choice_char));
+    strncat(choice_char,json_response + tokens[2].start, tokens[2].end - tokens[2].start);
+    int client_choice = atoi(choice_char);
+    memset(json_response,'\0',sizeof(json_response));
+    return client_choice;
+}
+
 int checklog(char *login, char *haslo)
 {
-	char const* const logins = "logins"; //not needed? or use instead of "logins"?
+        char const* const logins = "logins";
 	FILE *file = fopen(logins, "r");
 	char line[512];
 	char *search = " ";
