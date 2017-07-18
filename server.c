@@ -162,6 +162,26 @@ int main(int argc, char *argv[])
 		perror("opendir error:");
 	}
 
+	////////////Sending file///////////////////////
+	recv(client_socket, json_response, 99, 0);
+	printf("recv:%s\n",json_response);
+
+	// send whole file
+	FILE *fp;
+	fp = fopen("files_on_server/humans.txt","r");
+	if (fp == NULL)
+	{
+		printf("File not created okay, errno = %d\n", errno);
+	}
+	char buff[MAXDATASIZE];
+	while(fgets(buff, MAXDATASIZE, fp) != NULL)
+	{
+		sendall(client_socket, buff);
+		memset(buff, '\0', sizeof(buff));
+	}
+	fclose(fp);
+	///////////End of sending////////////////////
+
 	close(client_socket);
 	close(server_socket);
 	return 0;

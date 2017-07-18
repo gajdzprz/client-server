@@ -76,6 +76,34 @@ int main(int argc, char *argv[])
 		display_files(json_response);
 		// TO DO: next if statement with choice of which file 
 		// want to download or remove
+
+		if (choice == 2)
+		{
+			scanf("%d", &choice);
+			sprintf(choice_char, "%d", choice);
+			memset(json_request,'\0',sizeof(json_request));
+			memset(json_response, '\0', sizeof(json_response));
+			// recv file
+			strcat(json_request, "{\"choice\": \"");
+			strcat(json_request, choice_char);
+			strcat(json_request, "\"}");
+			printf("send:%s\n", json_request);
+
+			send(client_socket, json_request, strlen(json_request),0);
+			FILE *fp;
+			fp = fopen("files_download/humans.txt","w");
+			if (fp == NULL)
+			{
+				printf("File not created okay, errno = %d\n", errno);
+				exit(1);
+			}
+			while(recv(client_socket,json_response, 99, 0) > 0)
+			{
+				fprintf(fp,"%s",json_response);
+				memset(json_response, '\0', sizeof(json_response));
+			}
+			fclose(fp);
+		}
 	}
 	else if (choice == 4)
 	{
@@ -180,7 +208,7 @@ void display_files(char * json_response)
 	{
 		if (tokens[i].type == JSMN_STRING)
 		{
-			printf("%.*s\n",tokens[i].end - tokens[i].start, json_response + tokens[i].start);
+			printf("%d. %.*s\n",i-2,tokens[i].end - tokens[i].start, json_response + tokens[i].start);
 		}
 	}
 }
