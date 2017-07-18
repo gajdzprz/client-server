@@ -9,7 +9,7 @@
 #include <unistd.h>
 
 // jsmn include
-#include "../jsmn/jsmn.h"
+#include "jsmn/jsmn.h"
 
 #define PORT 8081
 #define MAXDATASIZE 100

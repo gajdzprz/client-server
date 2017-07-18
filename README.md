@@ -10,16 +10,7 @@ git clone git@github.com:gajdzprz/client-server.git client-server
 
 ## How to compile project
 
-Before you start compile project you need to clone jsmn
-```
-git clone https://github.com/zserge/jsmn jsmn
-```
-next go to jsmn directory and run
-```
-make
-```
-you should get a libjsmn.a
-next go to client-server directory and run
+go to client-server directory and run
 ```
 make
 ```
