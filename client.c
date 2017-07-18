@@ -14,6 +14,7 @@
 #define PORT 8081
 #define MAXDATASIZE 100
 
+void send_choice(int client_socket, int choice);
 void logging(char * json_request, char * json_response, int client_socket);
 void display_menu(void);
 void display_files(char * json);
@@ -59,18 +60,11 @@ int main(int argc, char *argv[])
 	memset(json_request, '\0', sizeof(json_request));
 	int choice;
 	display_menu();
-	scanf("%d", &choice);
-	strcat(json_request,"{\"choice\": \"");
-	char choice_char[2];
-	sprintf(choice_char, "%d", choice);
-	strcat(json_request,choice_char);
-	strcat(json_request,"\"}");
+        scanf("%d", &choice);
 
 	if (choice > 0 && choice < 4)
-	{
-		send(client_socket, json_request, strlen(json_request),0);
-		printf("send:%s\n",json_request);
-		memset(json_request,'\0',sizeof(json_request));
+        {
+                send_choice(client_socket,choice);
 		memset(json_response, '\0', sizeof(json_response));
 		int numb = recv(client_socket, json_response, 99, 0);
 		display_files(json_response);
@@ -79,17 +73,12 @@ int main(int argc, char *argv[])
 
 		if (choice == 2)
 		{
-			scanf("%d", &choice);
-			sprintf(choice_char, "%d", choice);
+                        scanf("%d", &choice);
 			memset(json_request,'\0',sizeof(json_request));
 			memset(json_response, '\0', sizeof(json_response));
-			// recv file
-			strcat(json_request, "{\"choice\": \"");
-			strcat(json_request, choice_char);
-			strcat(json_request, "\"}");
-			printf("send:%s\n", json_request);
+                        send_choice(client_socket,choice);
 
-			send(client_socket, json_request, strlen(json_request),0);
+                        // recv file
 			FILE *fp;
 			fp = fopen("files_download/humans.txt","w");
 			if (fp == NULL)
@@ -117,6 +106,25 @@ int main(int argc, char *argv[])
 	close(client_socket);
 
 	return 0 ;
+}
+
+void send_choice(int client_socket, int choice)
+{
+    char json_request[MAXDATASIZE];
+    char choice_char[3];
+    int num_send;
+    strcat(json_request, "{\"choice\": \"");
+    sprintf(choice_char, "%d", choice);
+    strcat(json_request, choice_char);
+    strcat(json_request, "\"}");
+    num_send = send(client_socket, json_request, strlen(json_request), 0);
+    if (num_send == -1)
+    {
+        perror("send error");
+    }
+    // add error checking
+    printf("send:%s\n", json_request);
+    memset(json_request,'\0',sizeof(json_request));
 }
 
 void logging(char * json_request, char * json_response, int client_socket)
@@ -194,7 +202,6 @@ void display_menu(void)
 	printf("4 - send file\n");
 }
 
-// TO DO: download from server list of files
 void display_files(char * json_response)
 {
 	printf("recv:%s\n",json_response);
