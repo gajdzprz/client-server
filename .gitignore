@@ -1,3 +1,5 @@
 *.o
 client
 server
+jsmn/*
+files_download/*
