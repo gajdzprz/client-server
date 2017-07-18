@@ -62,6 +62,7 @@ int main(int argc, char *argv[])
 	display_menu();
         scanf("%d", &choice);
 
+        // display files
 	if (choice > 0 && choice < 4)
         {
                 send_choice(client_socket,choice);
@@ -71,6 +72,7 @@ int main(int argc, char *argv[])
 		// TO DO: next if statement with choice of which file 
 		// want to download or remove
 
+                // download file
 		if (choice == 2)
 		{
                         scanf("%d", &choice);
@@ -93,6 +95,12 @@ int main(int argc, char *argv[])
 			}
 			fclose(fp);
 		}
+                // remove file
+                else if (choice == 3)
+                {
+                        scanf("%d", &choice);
+                        send_choice(client_socket,choice);
+                }
 	}
 	else if (choice == 4)
 	{
@@ -122,7 +130,6 @@ void send_choice(int client_socket, int choice)
     {
         perror("send error");
     }
-    // add error checking
     printf("send:%s\n", json_request);
     memset(json_request,'\0',sizeof(json_request));
 }
