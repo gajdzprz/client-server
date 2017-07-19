@@ -14,10 +14,10 @@
 #define PORT 8081
 #define MAXDATASIZE 100
 
-void send_choice(int client_socket, int choice);
-void logging(char * json_request, char * json_response, int client_socket);
-void display_menu(void);
-void display_files(char * json);
+static void send_choice(int client_socket, int choice, char * file);
+static void logging(char * json_request, char * json_response, int client_socket);
+static void display_menu(void);
+static void display_files(char * json);
 
 int main(int argc, char *argv[])
 {
@@ -61,11 +61,15 @@ int main(int argc, char *argv[])
 	int choice;
 	display_menu();
         scanf("%d", &choice);
-
-        // display files
-	if (choice > 0 && choice < 4)
+        // tutaj bedzie for
+        if (choice == 0)
         {
-                send_choice(client_socket,choice);
+            exit(0);
+        }
+        // display files
+        else if (choice > 0 && choice < 4)
+        {
+                send_choice(client_socket,choice, "");
 		memset(json_response, '\0', sizeof(json_response));
 		int numb = recv(client_socket, json_response, 99, 0);
 		display_files(json_response);
@@ -76,9 +80,15 @@ int main(int argc, char *argv[])
 		if (choice == 2)
 		{
                         scanf("%d", &choice);
+                        /*
+                        if (choice == 0)
+                        {
+                            continue;
+                        }
+                        */
 			memset(json_request,'\0',sizeof(json_request));
 			memset(json_response, '\0', sizeof(json_response));
-                        send_choice(client_socket,choice);
+                        send_choice(client_socket,choice, "humans.txt");
 
                         // recv file
 			FILE *fp;
@@ -99,7 +109,7 @@ int main(int argc, char *argv[])
                 else if (choice == 3)
                 {
                         scanf("%d", &choice);
-                        send_choice(client_socket,choice);
+                        send_choice(client_socket,choice, "b");
                 }
 	}
 	else if (choice == 4)
@@ -116,14 +126,22 @@ int main(int argc, char *argv[])
 	return 0 ;
 }
 
-void send_choice(int client_socket, int choice)
+static void send_choice(int client_socket, int choice, char * file)
 {
     char json_request[MAXDATASIZE];
     char choice_char[3];
     int num_send;
-    strcat(json_request, "{\"choice\": \"");
-    sprintf(choice_char, "%d", choice);
-    strcat(json_request, choice_char);
+    if (strlen(file) > 0)
+    {
+        strcat(json_request, "{\"file\": \"");
+        strcat(json_request, file);
+    }
+    else
+    {
+        strcat(json_request, "{\"choice\": \"");
+        sprintf(choice_char, "%d", choice);
+        strcat(json_request, choice_char);
+    }
     strcat(json_request, "\"}");
     num_send = send(client_socket, json_request, strlen(json_request), 0);
     if (num_send == -1)
@@ -134,7 +152,8 @@ void send_choice(int client_socket, int choice)
     memset(json_request,'\0',sizeof(json_request));
 }
 
-void logging(char * json_request, char * json_response, int client_socket)
+
+static void logging(char * json_request, char * json_response, int client_socket)
 {
 	char buf[MAXDATASIZE];
 	// creating json login
@@ -185,7 +204,7 @@ void logging(char * json_request, char * json_response, int client_socket)
 		else
 		{
 			strncat(buf, json_response + tokens[2].start, tokens[2].end - tokens[2].start);
-			if ((strcmp(buf, "tak")) == 0)
+                        if ((strcmp(buf, "YES")) == 0)
 			{
 				printf("log on\n");
 			}
@@ -200,16 +219,18 @@ void logging(char * json_request, char * json_response, int client_socket)
 	memset(json_response, '\0', sizeof(json_request));
 }
 
-void display_menu(void)
+
+static void display_menu(void)
 {
 	printf("-------MENU-------\n");
+        printf("0 - exit\n");
 	printf("1 - display files\n");
 	printf("2 - download file\n");
 	printf("3 - remove file\n");
 	printf("4 - send file\n");
 }
 
-void display_files(char * json_response)
+static void display_files(char * json_response)
 {
 	printf("recv:%s\n",json_response);
 	jsmn_parser parser;
@@ -218,6 +239,7 @@ void display_files(char * json_response)
 	int num_files = jsmn_parse(&parser, json_response, strlen(json_response), tokens, 100);
 	int i;
 	printf("-------MENU-------\n");
+        printf("0. Cancel\n");
 	for (i = 3; i<num_files; i++)
 	{
 		if (tokens[i].type == JSMN_STRING)
