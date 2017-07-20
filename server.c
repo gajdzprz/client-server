@@ -72,16 +72,16 @@ int main(int argc, char *argv[])
         memset(json_response, 0, sizeof(json_response));
         recv_response(client_socket, json_response);
 
+        // parse json with login and password into tokens
         jsmntok_t * ptr_tokens;
         ptr_tokens = parser_jsmn(json_response, ptr_tokens, 5);
 
         memset(json_request, 0, sizeof(json_request));
-        strcat(json_request, "{\"checklog\": ");
         // checking login and password
         int log = checklog(ptr_tokens,json_response);
 	if( log == 0)
 	{
-                strcat(json_request, "\"YES\"}");
+                strcat(json_request, "{\"checklog\": \"YES\"}");
 		if (sendall(client_socket, json_request) == -1)
 		{
                         perror("sendall error");
@@ -89,36 +89,43 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-                strcat(json_request, "\"NO\"}");
+                strcat(json_request, "{\"checklog\": \"NO\"}");
 		if (sendall(client_socket, json_request) == -1)
 		{
-			perror("sendall error");
-                        exit(1);
+                        perror("sendall error");
 		}
+
+                printf("send:%s\n", json_request);
+                free(ptr_tokens);
+                exit(1);
 	}
 	printf("send:%s\n", json_request);
         free(ptr_tokens);
 
-        /// Sending list of files
         memset(json_response, 0, sizeof(json_response));
         memset(json_request, 0, sizeof(json_request));
+        // waiting for choice
         int choice = recv_choice(client_socket);
         if (choice > 0 && choice < 4)
         {
+            // sending list of files
             send_files_list(json_request, client_socket);
 
             if (choice == 2)
             {
+                // sending whole file
                 send_file(client_socket);
             }
             else if (choice == 3)
             {
                 // remove file
+                remove_file(client_socket);
             }
         }
         else if (choice == 4)
         {
             // download file from client
+            recv_file(client_socket);
         }
         else
         {

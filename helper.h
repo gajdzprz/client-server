@@ -9,6 +9,6 @@ void recv_response(int client_socket, char * json_response);
 
 int recv_choice(int client_socket);
 
-char * recv_file(int client_socket, char * file_name);
+char * recv_file_name(int client_socket, char * file_name);
 
 #endif

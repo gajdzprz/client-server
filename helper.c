@@ -68,7 +68,7 @@ int recv_choice(int client_socket)
     return client_choice;
 }
 
-char * recv_file(int client_socket, char * file_name)
+char * recv_file_name(int client_socket, char * file_name)
 {
     static char json_response[MAXDATASIZE];
     memset(json_response, 0, sizeof(json_response));

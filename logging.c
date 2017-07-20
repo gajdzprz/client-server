@@ -1,7 +1,8 @@
-#include "logging.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "jsmn/jsmn.h"
 
 int checklog(jsmntok_t * ptr_tokens,char * json_response)
 {

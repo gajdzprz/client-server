@@ -55,6 +55,8 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
+        memset(json_request, '\0', sizeof(json_request));
+        memset(json_response, '\0', sizeof(json_response));
 	logging(json_request, json_response, client_socket);
 
 	memset(json_request, '\0', sizeof(json_request));
@@ -108,13 +110,38 @@ int main(int argc, char *argv[])
                 // remove file
                 else if (choice == 3)
                 {
-                        scanf("%d", &choice);
-                        send_choice(client_socket,choice, "b");
+                        //scanf("%d", &choice);
+                        send_choice(client_socket,choice, "my_bisect_scrypt");
                 }
 	}
 	else if (choice == 4)
 	{
+                send_choice(client_socket,choice, "");
 		printf("Write path to the file:\n");
+                char path[100];
+                char file_name[100];
+                scanf("%s", path);
+                printf("You passed path:%s\n",path);
+                printf("Write name how to save you file:\n");
+                scanf("%s", file_name);
+                send_choice(client_socket,choice, file_name);
+
+                //sending file
+                FILE *fp;
+                fp = fopen(path,"r");
+                if (fp == NULL)
+                {
+                        printf("File not created okay, errno = %d\n", errno);
+                }
+                char buff[MAXDATASIZE];
+                memset(buff, 0, sizeof(buff));
+                while(fgets(buff, MAXDATASIZE, fp) != NULL)
+                {
+                        send(client_socket, buff, strlen(buff),0);
+                        memset(buff, 0, sizeof(buff));
+                }
+                fclose(fp);
+                memset(path, 0, sizeof(path));
 	}
 	else
 	{
@@ -129,6 +156,7 @@ int main(int argc, char *argv[])
 static void send_choice(int client_socket, int choice, char * file)
 {
     char json_request[MAXDATASIZE];
+    memset(json_request,'\0',sizeof(json_request));
     char choice_char[3];
     int num_send;
     if (strlen(file) > 0)
@@ -143,6 +171,7 @@ static void send_choice(int client_socket, int choice, char * file)
         strcat(json_request, choice_char);
     }
     strcat(json_request, "\"}");
+    json_request[strlen(json_request)] = '\0';
     num_send = send(client_socket, json_request, strlen(json_request), 0);
     if (num_send == -1)
     {
