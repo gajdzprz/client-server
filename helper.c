@@ -1,5 +1,6 @@
 #include "helper.h"
 #include "parser.h"
+#include <arpa/inet.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -30,11 +31,11 @@ int sendall(int client_socket, char * json_request)
         return (sent_bytes == -1) ? -1 : 0;
 }
 
-void recv_response(int client_socket, char * json_response)
+void recv_response(int client_socket, char * json_response, int length)
 {
     memset(json_response, 0, sizeof(json_response));
     int numbytes;
-    numbytes = recv(client_socket, json_response, MAXDATASIZE-1, 0);
+    numbytes = recv(client_socket, json_response, length, 0);
     if (numbytes == -1)
     {
             perror("json_response error");
@@ -50,11 +51,11 @@ void recv_response(int client_socket, char * json_response)
     }
 }
 
-int recv_choice(int client_socket)
+int recv_choice(int client_socket, int length)
 {
     char json_response[MAXDATASIZE];
     memset(json_response, 0, sizeof(json_response));
-    recv_response(client_socket, json_response);
+    recv_response(client_socket, json_response, length);
 
     jsmntok_t * ptr_tokens;
     ptr_tokens = parser_jsmn(json_response, ptr_tokens, 3);
@@ -70,9 +71,10 @@ int recv_choice(int client_socket)
 
 char * recv_file_name(int client_socket, char * file_name)
 {
-    static char json_response[MAXDATASIZE];
+    char json_response[MAXDATASIZE];
     memset(json_response, 0, sizeof(json_response));
-    recv_response(client_socket, json_response);
+    int length = recv_length(client_socket);
+    recv_response(client_socket, json_response, length);
 
     jsmntok_t * ptr_tokens;
     ptr_tokens = parser_jsmn(json_response, ptr_tokens, 3);
@@ -83,3 +85,33 @@ char * recv_file_name(int client_socket, char * file_name)
     free(ptr_tokens);
     return file_name;
 }
+
+
+int recv_length(int client_socket)
+{
+    int length;
+    int numbytes;
+    numbytes = recv(client_socket, &length, 4, 0);
+    if (numbytes == -1)
+    {
+            perror("json_response error");
+            exit(1);
+    }
+    else if (numbytes == 0)
+    {
+            printf("Lost connection, client disconnected\n");
+    }
+    else
+    {
+            //printf("recv:%s\n",json_response); // later can be removed
+            printf("recv length:%d\n", length);
+    }
+    return length;
+}
+
+void send_length(int client_socket, int length)
+{
+    send(client_socket, &length, sizeof(int), 0);
+    printf("send %d\n", length);
+}
+

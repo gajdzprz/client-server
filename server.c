@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
 	int server_socket, client_socket;
 	struct sockaddr_in server_addr, client_addr;
         char json_request[MAXDATASIZE], json_response[MAXDATASIZE];
+        char * js;
 	int size;
 	int yes = 1;
 
@@ -68,20 +69,26 @@ int main(int argc, char *argv[])
 	}
         printf("server: got connection from %s\n", inet_ntoa(client_addr.sin_addr));
 
+
+        // only for test
+        int length = recv_length(client_socket);
+        js = (char *) malloc(length * sizeof(char *));
+
         // recv json with login and password
-        memset(json_response, 0, sizeof(json_response));
-        recv_response(client_socket, json_response);
+        memset(js, 0, sizeof(js));
+        recv_response(client_socket, js, length);
 
         // parse json with login and password into tokens
         jsmntok_t * ptr_tokens;
-        ptr_tokens = parser_jsmn(json_response, ptr_tokens, 5);
+        ptr_tokens = parser_jsmn(js, ptr_tokens, 5);
 
         memset(json_request, 0, sizeof(json_request));
         // checking login and password
-        int log = checklog(ptr_tokens,json_response);
+        int log = checklog(ptr_tokens,js);
 	if( log == 0)
 	{
                 strcat(json_request, "{\"checklog\": \"YES\"}");
+                send_length(client_socket, strlen(json_request)+1);
 		if (sendall(client_socket, json_request) == -1)
 		{
                         perror("sendall error");
@@ -90,11 +97,11 @@ int main(int argc, char *argv[])
 	else
 	{
                 strcat(json_request, "{\"checklog\": \"NO\"}");
+                send_length(client_socket, strlen(json_request)+1);
 		if (sendall(client_socket, json_request) == -1)
 		{
                         perror("sendall error");
 		}
-
                 printf("send:%s\n", json_request);
                 free(ptr_tokens);
                 exit(1);
@@ -104,8 +111,10 @@ int main(int argc, char *argv[])
 
         memset(json_response, 0, sizeof(json_response));
         memset(json_request, 0, sizeof(json_request));
+
+        length = recv_length(client_socket);
         // waiting for choice
-        int choice = recv_choice(client_socket);
+        int choice = recv_choice(client_socket, length);
         if (choice > 0 && choice < 4)
         {
             // sending list of files
@@ -132,6 +141,7 @@ int main(int argc, char *argv[])
             printf("Wrong number\n");
         }
 
+        free(js);
 	close(client_socket);
 	close(server_socket);
 	return 0;

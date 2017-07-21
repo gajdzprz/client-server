@@ -6,8 +6,8 @@ all: server client
 server: server.o parser.o logging.o helper.o menu.o libjsmn.a
 	$(CC) server.o parser.o logging.o helper.o menu.o -L jsmn/ -ljsmn -o server
 
-client: test_client.o libjsmn.a
-	$(CC) test_client.o -L jsmn/ -ljsmn -o test_client
+client: test_client.o parser.o helper.o libjsmn.a
+	$(CC) test_client.o parser.o helper.o -L jsmn/ -ljsmn -o test_client
 
 libjsmn.a: jsmn/jsmn.o
 	$(AR) rc jsmn/libjsmn.a jsmn/jsmn.o

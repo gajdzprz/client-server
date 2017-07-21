@@ -8,6 +8,9 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+// internal include
+#include "helper.h"
+
 // jsmn include
 #include "jsmn/jsmn.h"
 
@@ -55,6 +58,12 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
+        // only for test
+        //send_length(client_socket, 155);
+        // chyba tak powinno byc?!
+        //char * js = malloc(length * sizeof(char));
+        // free(js);
+
         memset(json_request, '\0', sizeof(json_request));
         memset(json_response, '\0', sizeof(json_response));
 	logging(json_request, json_response, client_socket);
@@ -73,7 +82,8 @@ int main(int argc, char *argv[])
         {
                 send_choice(client_socket,choice, "");
 		memset(json_response, '\0', sizeof(json_response));
-		int numb = recv(client_socket, json_response, 99, 0);
+                int length = recv_length(client_socket);
+                int numb = recv(client_socket, json_response, length, 0);
 		display_files(json_response);
 		// TO DO: next if statement with choice of which file 
 		// want to download or remove
@@ -92,6 +102,7 @@ int main(int argc, char *argv[])
 			memset(json_response, '\0', sizeof(json_response));
                         send_choice(client_socket,choice, "humans.txt");
 
+                        length = recv_length(client_socket);
                         // recv file
 			FILE *fp;
 			fp = fopen("files_download/humans.txt","w");
@@ -100,10 +111,17 @@ int main(int argc, char *argv[])
 				printf("File not created okay, errno = %d\n", errno);
 				exit(1);
 			}
-			while(recv(client_socket,json_response, 99, 0) > 0)
+                        int max = 100;
+                        int count;
+                        while((count = recv(client_socket,json_response, max, 0)) > 0)
 			{
 				fprintf(fp,"%s",json_response);
-				memset(json_response, '\0', sizeof(json_response));
+                                memset(json_response, 0, sizeof(json_response));
+                                length -= count;
+                                if (length < 100)
+                                {
+                                    max = length;
+                                }
 			}
 			fclose(fp);
 		}
@@ -133,12 +151,34 @@ int main(int argc, char *argv[])
                 {
                         printf("File not created okay, errno = %d\n", errno);
                 }
+
+                fseek(fp, 0L,SEEK_END);
+                int length = ftell(fp);
+                send_length(client_socket,length);
+                fclose(fp);
+                fp = fopen(path,"r");
+
                 char buff[MAXDATASIZE];
+                int max = 100;
+                if (length < 100)
+                {
+                    max = length;
+                }
                 memset(buff, 0, sizeof(buff));
-                while(fgets(buff, MAXDATASIZE, fp) != NULL)
+                while(fgets(buff, max, fp) != NULL)
                 {
                         send(client_socket, buff, strlen(buff),0);
+                        printf("\nstrlen:%ld,max:%d1.%s",strlen(buff),max,buff);
+                        length -= strlen(buff);
+                        if (length <= 100)
+                        {
+                            max = length;
+                        }
                         memset(buff, 0, sizeof(buff));
+                        if (max == 0)
+                        {
+                            break;
+                        }
                 }
                 fclose(fp);
                 memset(path, 0, sizeof(path));
@@ -172,6 +212,7 @@ static void send_choice(int client_socket, int choice, char * file)
     }
     strcat(json_request, "\"}");
     json_request[strlen(json_request)] = '\0';
+    send_length(client_socket,strlen(json_request));
     num_send = send(client_socket, json_request, strlen(json_request), 0);
     if (num_send == -1)
     {
@@ -204,11 +245,16 @@ static void logging(char * json_request, char * json_response, int client_socket
 
 	printf("send:%s\n",json_request);
 
+        // send length of json with login and password
+        send_length(client_socket, strlen(json_request)+1);
+        // send json
 	send(client_socket, json_request, strlen(json_request), 0);
 	memset(buf,'\0', sizeof(buf));
 	memset(json_request,'\0', sizeof(json_request));
 
-	int numbytes = recv(client_socket,json_response,MAXDATASIZE-1,0);
+        int length = recv_length(client_socket);
+
+        int numbytes = recv(client_socket,json_response,length,0);
 	if (numbytes == -1)
 	{
 		perror("Sign in error");
